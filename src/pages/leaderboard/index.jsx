@@ -3,10 +3,11 @@ import api from '../../services/api';
 import StudentNavigation from '../../components/navigation/StudentNavigation';
 import AdminNavigation from '../../components/navigation/AdminNavigation';
 import Icon from '../../components/AppIcon';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Leaderboard = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const isAdmin = location.pathname.includes('/admin');
 
     const [leaderboard, setLeaderboard] = useState([]);
@@ -28,7 +29,16 @@ const Leaderboard = () => {
     }, []);
 
     const LogoutHandler = () => {
-        window.location.href = isAdmin ? '/admin-login' : '/student-login-registration';
+        if (isAdmin) {
+            localStorage.removeItem('adminAuth');
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('rememberAdmin');
+            navigate('/admin-login');
+        } else {
+            // Clear student auth if any (though we found none explicitly used in AuthForm, good practice to be safe or just redirect)
+            navigate('/student-login-registration');
+        }
     };
 
     return (

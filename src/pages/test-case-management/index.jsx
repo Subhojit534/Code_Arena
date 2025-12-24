@@ -140,6 +140,10 @@ const TestCaseManagement = () => {
     }, [selectedProblem]);
 
     const handleLogout = () => {
+        localStorage.removeItem('adminAuth');
+        localStorage.removeItem('adminToken');
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('rememberAdmin');
         navigate('/admin-login');
     };
 
