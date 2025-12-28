@@ -269,6 +269,84 @@ const CodingInterface = () => {
           status: null
         }
       ]
+    },
+    {
+      id: 6,
+      title: "Print 1 to 10",
+      difficulty: "Easy",
+      score: 10,
+      submissions: 0,
+      successRate: 100,
+      solved: false,
+      description: "Write a program that prints the numbers from 1 to 10, each on a new line.",
+      constraints: [],
+      examples: [
+        {
+          input: "",
+          output: "1\\n2\\n3\\n4\\n5\\n6\\n7\\n8\\n9\\n10",
+          explanation: "Prints numbers 1 to 10 sequentially."
+        }
+      ],
+      publicTestCases: [
+        {
+          input: "",
+          expectedOutput: "1\n2\n3\n4\n5\n6\n7\n8\n9\n10",
+          actualOutput: null,
+          status: null
+        }
+      ]
+    },
+    {
+      id: 7,
+      title: "Simple Subtraction",
+      difficulty: "Easy",
+      score: 10,
+      submissions: 0,
+      successRate: 100,
+      solved: false,
+      description: "Read two integers from input and print their difference (first - second).",
+      constraints: [
+        "-1000 ≤ a, b ≤ 1000"
+      ],
+      examples: [
+        {
+          input: "100 45",
+          output: "55",
+          explanation: "100 - 45 = 55"
+        }
+      ],
+      publicTestCases: [
+        {
+          input: "100 45",
+          expectedOutput: "55",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "50 20",
+          expectedOutput: "30",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "20 50",
+          expectedOutput: "-30",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "10 10",
+          expectedOutput: "0",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "-10 -5",
+          expectedOutput: "-5",
+          actualOutput: null,
+          status: null
+        }
+      ]
     }
   ];
 
