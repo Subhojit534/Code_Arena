@@ -2,25 +2,23 @@ import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Select from '../../../components/ui/Select';
 
-const CodeEditor = ({ 
-  code, 
-  setCode, 
-  language, 
-  setLanguage, 
-  onRun, 
-  onSubmit, 
-  isRunning, 
-  isSubmitting 
+const CodeEditor = ({
+  code,
+  setCode,
+  language,
+  setLanguage,
+  onRun,
+  onSubmit,
+  isRunning,
+  isSubmitting
 }) => {
   const [lineCount, setLineCount] = useState(1);
 
   const languageOptions = [
     { value: 'python', label: 'Python 3.9' },
-    { value: 'javascript', label: 'JavaScript (Node.js)' },
     { value: 'cpp', label: 'C++ 17' },
     { value: 'c', label: 'C (GCC)' },
     { value: 'java', label: 'Java 11' },
-    { value: 'go', label: 'Go 1.18' },
     { value: 'rust', label: 'Rust 1.65' }
   ];
 
