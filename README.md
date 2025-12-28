@@ -17,7 +17,9 @@ If you are developing a production application, we recommend using TypeScript wi
 
 # Code_Arena
 
-https://raw.githubusercontent.com/Subhojit534/Code_Arena/refs/heads/main/recording.mp4
+<video src="https://raw.githubusercontent.com/Subhojit534/Code_Arena/refs/heads/main/recording.mp4" controls>
+  Your browser does not support the video tag.
+</video>
 
 ```json
 {
