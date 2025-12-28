@@ -17,11 +17,13 @@ If you are developing a production application, we recommend using TypeScript wi
 
 # Code_Arena
 
+
+https://github.com/user-attachments/assets/f8cdba73-6370-4799-a25a-2cb6c981ec1c
+
+
 ## Demo recording
 
-GitHub doesn't reliably allow inline playback from raw file URLs in README HTML. View the demo video directly on GitHub:
 
-[Recording (MP4)](https://github.com/Subhojit534/Code_Arena/blob/main/recording.mp4)
 
 If you need inline playback in the README, convert the clip to an animated GIF (smaller clips) or add the video as a release asset and link to it.
 
