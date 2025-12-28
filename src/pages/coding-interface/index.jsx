@@ -353,9 +353,8 @@ const CodingInterface = () => {
         tests: tests
       };
 
-      const response = await api.post('/submission/test/public', payload);
-
-      const result = response.data;
+      const result = await api.post('/submission/test/public', payload);
+      console.log(result);
       // result structure from backend: { Status: "...", Results: [...], Error: "..." }
 
       // Map backend results to frontend format
@@ -375,36 +374,14 @@ const CodingInterface = () => {
       // Let's assume for now we just show the raw output or try to map it.
       // "SUCCESS" matches currentstatus.SUCCESS.ToString()
 
-      let testResults = [];
-      if (result.results && Array.isArray(result.results)) {
-        testResults = result.results.map((r, i) => ({
-          input: tests[i]?.stdin,
-          expected: tests[i]?.expected_output,
-          actual: r.status?.stdout?.trim(),
-          passed: r.status?.stdout?.trim() === tests[i]?.expected_output?.trim(),
-          error: r.status?.stderr
-        }));
-      }
 
-      // Check if mapped results are empty (if runner failed before tests)
-      if (testResults.length === 0 && tests.length > 0) {
-        // Fallback if no specific test results but we have global error or output
-        testResults = tests.map(t => ({
-          input: t.stdin,
-          expected: t.expected_output,
-          actual: result.error || "Execution failed",
-          passed: false
-        }));
-      }
-
-      const allPassed = testResults.every(r => r.passed) && isSuccess;
 
       setOutput({
-        status: allPassed ? 'success' : 'error',
-        message: allPassed
+        status: isSuccess ? 'success' : 'error',
+        message: isSuccess
           ? 'All public test cases passed! Ready to submit.'
           : (result.error || 'Some test cases failed. Review your code and try again.'),
-        testResults: testResults,
+        testResults: result.results,
         executionTime: 0 // Backend doesn't seem to return time yet
       });
 
@@ -446,33 +423,37 @@ const CodingInterface = () => {
         tests: tests
       };
 
-      const response = await api.post('/submission/test/private', payload);
-      const result = response.data;
-      const isSuccess = result.status === 'SUCCESS';
+      const result = await api.post('/submission/test/public', payload);
+      console.log(result);
+      // result structure from backend: { Status: "...", Results: [...], Error: "..." }
 
-      // Calculate score based on result
-      // Assuming result.Results contains execution output for each test case
-      let passedTests = 0;
-      if (result.results && Array.isArray(result.results)) {
-        passedTests = result.results.filter((r, i) => r.status?.stdout?.trim() === tests[i]?.expected_output?.trim()).length;
-      } else if (isSuccess) {
-        // If no results returned but success, assume all passed (naive fallback)
-        passedTests = tests.length;
-      }
+      // Map backend results to frontend format
+      const isSuccess = result.status === 'SUCCESS'; // check specific enum string in backend? "Success"?
 
-      const totalTests = tests.length;
+      // We need to parse the backend results to match frontend expectations
+      // Backend Results: []ExecResult. ExecResult: { stdout: "...", stderr: "...", exit_code: 0 }
+      // Test cases loop?
+
+      // Wait, backend logic: k8s.RunOnPod(submission) -> extractJsonFromStdout.
+      // The runner inside the pod executes the code against inputs?
+      // Runner Implementation detail: The runner seems to just run one thing?
+      // Re-reading submission_controller: `res, err := k8s.K8sMgr.RunOnPod(submission)`
+      // RunOnPod sends logic. 
+      // Need to see what `RunOnPod` returns in `Results`.
+
+      // Let's assume for now we just show the raw output or try to map it.
+      // "SUCCESS" matches currentstatus.SUCCESS.ToString()
+
+
 
       setOutput({
         status: isSuccess ? 'success' : 'error',
-        message: isSuccess ? 'Congratulations! All test cases passed.' : 'Some test cases failed.',
-        submissionResults: true,
-        passedTests: passedTests,
-        failedTests: totalTests - passedTests,
-        score: isSuccess ? selectedProblem?.score : 0,
-        totalScore: selectedProblem?.score,
-        executionTime: 0
+        message: isSuccess
+          ? 'All public test cases passed! Ready to submit.'
+          : (result.error || 'Some test cases failed. Review your code and try again.'),
+        testResults: result.results,
+        executionTime: 0 // Backend doesn't seem to return time yet
       });
-
     } catch (error) {
       console.error("Submission error:", error);
       setOutput({

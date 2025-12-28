@@ -40,16 +40,14 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
           <div className="space-y-4">
             {/* Status */}
             {output?.status && (
-              <div className={`flex items-center gap-2 text-sm font-medium ${
-                output?.status === 'success' ? 'text-success' :
-                output?.status === 'error'? 'text-error' : 'text-warning'
-              }`}>
-                <Icon 
+              <div className={`flex items-center gap-2 text-sm font-medium ${output?.status === 'success' ? 'text-success' : 'text-error'
+                }`}>
+                <Icon
                   name={
                     output?.status === 'success' ? 'CheckCircle2' :
-                    output?.status === 'error'? 'XCircle' : 'AlertCircle'
-                  } 
-                  size={16} 
+                      output?.status === 'error' ? 'XCircle' : 'AlertCircle'
+                  }
+                  size={16}
                 />
                 <span className="capitalize">{output?.status}</span>
               </div>
@@ -89,19 +87,17 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                 {output?.testResults?.map((result, index) => (
                   <div
                     key={index}
-                    className={`border rounded-lg p-3 ${
-                      result?.passed ? 'border-success/20 bg-success/5' : 'border-error/20 bg-error/5'
-                    }`}
+                    className={`border rounded-lg p-3 ${result?.status.current_status.toLowerCase() === "success" ? 'border-success/20 bg-success/5' : 'border-error/20 bg-error/5'
+                      }`}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium text-foreground">
                         Test Case {index + 1}
                       </span>
-                      <div className={`flex items-center gap-1 text-sm ${
-                        result?.passed ? 'text-success' : 'text-error'
-                      }`}>
-                        <Icon name={result?.passed ? 'CheckCircle2' : 'XCircle'} size={14} />
-                        <span>{result?.passed ? 'Passed' : 'Failed'}</span>
+                      <div className={`flex items-center gap-1 text-sm ${result?.status.current_status.toLowerCase() === "success" ? 'text-success' : 'text-error'
+                        }`}>
+                        <Icon name={result?.status.current_status.toLowerCase() === "success" ? 'CheckCircle2' : 'XCircle'} size={14} />
+                        <span>{result?.status.current_status.toLowerCase() === "success" ? 'Passed' : 'Failed'}</span>
                       </div>
                     </div>
                     {result?.input && (
@@ -116,8 +112,8 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                     )}
                     {result?.actual && (
                       <div className="text-xs text-muted-foreground">
-                        Your Output: <code className={result?.passed ? 'text-success' : 'text-error'}>
-                          {result?.actual}
+                        Your Output: <code className={result?.status.current_status.toLowerCase() === "success" ? 'text-success' : 'text-error'}>
+                          {result?.stdin}
                         </code>
                       </div>
                     )}

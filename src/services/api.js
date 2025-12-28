@@ -1,15 +1,43 @@
-
 // Mock API Service for standalone frontend
 // This replaces the axios-based service to disconnect the backend
+
+import Result from "models/result";
 
 const mockDelay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const mockData = {
-    leaderboard: [
-        { rank: 1, name: "Alice Johnson", handle: "alice_j", solved: 150, xp: 15000, isCurrentUser: false },
-        { rank: 2, name: "Bob Smith", handle: "bob_dev", solved: 145, xp: 14200, isCurrentUser: false },
-        { rank: 3, name: "Charlie Brown", handle: "cbrown", solved: 140, xp: 13800, isCurrentUser: false },
-        { rank: 42, name: "Demo Student", handle: "demostudent", solved: 45, xp: 4200, isCurrentUser: true },
+    leaderboard: [{
+            rank: 1,
+            name: "Alice Johnson",
+            handle: "alice_j",
+            solved: 150,
+            xp: 15000,
+            isCurrentUser: false
+        },
+        {
+            rank: 2,
+            name: "Bob Smith",
+            handle: "bob_dev",
+            solved: 145,
+            xp: 14200,
+            isCurrentUser: false
+        },
+        {
+            rank: 3,
+            name: "Charlie Brown",
+            handle: "cbrown",
+            solved: 140,
+            xp: 13800,
+            isCurrentUser: false
+        },
+        {
+            rank: 42,
+            name: "Demo Student",
+            handle: "demostudent",
+            solved: 45,
+            xp: 4200,
+            isCurrentUser: true
+        },
     ],
     userProfile: {
         name: "Demo Student",
@@ -25,14 +53,38 @@ const mockData = {
             "Graphs": 30,
             "Trees": 50
         },
-        topicStats: [
-            { topic: "Arrays", count: 15, mastery: 85 },
-            { topic: "Strings", count: 12, mastery: 70 },
-            { topic: "DP", count: 5, mastery: 40 }
+        topicStats: [{
+                topic: "Arrays",
+                count: 15,
+                mastery: 85
+            },
+            {
+                topic: "Strings",
+                count: 12,
+                mastery: 70
+            },
+            {
+                topic: "DP",
+                count: 5,
+                mastery: 40
+            }
         ],
-        recentActivity: [
-            { id: 1, type: "submission", title: "Two Sum", status: "Accepted", timestamp: "2 hours ago", xp: 100 },
-            { id: 2, type: "contest", title: "Weekly Contest 55", status: "Rank #120", timestamp: "Yesterday", xp: 50 }
+        recentActivity: [{
+                id: 1,
+                type: "submission",
+                title: "Two Sum",
+                status: "Accepted",
+                timestamp: "2 hours ago",
+                xp: 100
+            },
+            {
+                id: 2,
+                type: "contest",
+                title: "Weekly Contest 55",
+                status: "Rank #120",
+                timestamp: "Yesterday",
+                xp: 50
+            }
         ]
     },
     dashboard: {
@@ -41,9 +93,14 @@ const mockData = {
             completed: 3,
             target: 5
         },
-        recentActivity: [
-            { id: 1, type: "submission", title: "Two Sum", status: "Accepted", timestamp: "2 hours ago", xp: 100 },
-        ]
+        recentActivity: [{
+            id: 1,
+            type: "submission",
+            title: "Two Sum",
+            status: "Accepted",
+            timestamp: "2 hours ago",
+            xp: 100
+        }, ]
     }
 };
 
@@ -53,18 +110,31 @@ const api = {
         console.log(`[Mock API] GET request to ${url}`);
 
         if (url === '/leaderboard') {
-            return { data: mockData.leaderboard };
+            return {
+                data: mockData.leaderboard
+            };
         }
         if (url === '/user/profile') {
-            return { data: mockData.userProfile };
+            return {
+                data: mockData.userProfile
+            };
         }
         if (url === '/user/dashboard') {
-            return { data: mockData.dashboard };
+            return {
+                data: mockData.dashboard
+            };
         }
 
         // Default 404 for unknown mocked routes, but we can return empty to prevent crashes
         console.warn(`[Mock API] Unhandled GET route: ${url}`);
-        return Promise.reject({ response: { status: 404, data: { error: "Not Found" } } });
+        return Promise.reject({
+            response: {
+                status: 404,
+                data: {
+                    error: "Not Found"
+                }
+            }
+        });
     },
 
     post: async (url, data) => {
@@ -76,7 +146,10 @@ const api = {
             if (data.id === 'admin@codearena.com' && data.password === 'Admin@2025') {
                 return {
                     status: 200,
-                    data: { token: "mock-admin-token-123", refresh_token: "mock-refresh-token" }
+                    data: {
+                        token: "mock-admin-token-123",
+                        refresh_token: "mock-refresh-token"
+                    }
                 };
             }
             // Allow generic admin login for demo purposes if specific creds fail, or strict?
@@ -84,10 +157,20 @@ const api = {
             if (data.id === 'admin' && data.password === 'admin') {
                 return {
                     status: 200,
-                    data: { token: "mock-admin-token-123", refresh_token: "mock-refresh-token" }
+                    data: {
+                        token: "mock-admin-token-123",
+                        refresh_token: "mock-refresh-token"
+                    }
                 };
             }
-            return Promise.reject({ response: { status: 401, data: { error: "Invalid credentials" } } });
+            return Promise.reject({
+                response: {
+                    status: 401,
+                    data: {
+                        error: "Invalid credentials"
+                    }
+                }
+            });
         }
 
         if (url === '/submission/test/public' || url === '/submission/test/private') {
@@ -98,32 +181,40 @@ const api = {
             const isSuccess = true;
             // Mocking results depending on input test cases
             // We can just mirror back the inputs saying they passed
+            const results = await fetch(`http://127.0.0.1:30080/submission/test/private`, {
+                method: "POST",
 
-            const results = data.tests ? data.tests.map(t => ({
-                status: {
-                    stdout: t.expected_output, // Cheat: always return expected output
-                    stderr: "",
-                    exit_code: 0
-                }
-            })) : [];
+                headers: {
+                    "Content-Type": "application/json"
+                    
+                },
+                body: JSON.stringify(data)
+            }).then((res) => res.json())
 
-            return {
-                data: {
-                    status: "SUCCESS",
-                    results: results,
-                    error: null
-                }
-            };
+            console.log(results)
+
+            return new Result(results)
         }
 
         console.warn(`[Mock API] Unhandled POST route: ${url}`);
-        return Promise.reject({ response: { status: 404, data: { error: "Not Found" } } });
+        return Promise.reject({
+            response: {
+                status: 404,
+                data: {
+                    error: "Not Found"
+                }
+            }
+        });
     },
 
     // Add interceptors mock to avoid crashing components that access them directly (if any)
     interceptors: {
-        request: { use: () => { } },
-        response: { use: () => { } }
+        request: {
+            use: () => {}
+        },
+        response: {
+            use: () => {}
+        }
     },
 
     defaults: {
