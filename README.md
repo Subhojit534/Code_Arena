@@ -17,9 +17,13 @@ If you are developing a production application, we recommend using TypeScript wi
 
 # Code_Arena
 
-<video src="https://raw.githubusercontent.com/Subhojit534/Code_Arena/refs/heads/main/recording.mp4">
-  Your browser does not support the video tag.
-</video>
+## Demo recording
+
+GitHub doesn't reliably allow inline playback from raw file URLs in README HTML. View the demo video directly on GitHub:
+
+[Recording (MP4)](https://github.com/Subhojit534/Code_Arena/blob/main/recording.mp4)
+
+If you need inline playback in the README, convert the clip to an animated GIF (smaller clips) or add the video as a release asset and link to it.
 
 ```json
 {
