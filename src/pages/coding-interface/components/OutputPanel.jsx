@@ -92,7 +92,7 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium text-foreground">
-                        Test Case {index + 1}
+                        Test Case {result.test_id}
                       </span>
                       <div className={`flex items-center gap-1 text-sm ${result?.status.current_status.toLowerCase() === "success" ? 'text-success' : 'text-error'
                         }`}>
@@ -100,16 +100,12 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                         <span>{result?.status.current_status.toLowerCase() === "success" ? 'Passed' : 'Failed'}</span>
                       </div>
                     </div>
-                    {result?.input && (
+                    {result?.status?.message && (
                       <div className="text-xs text-muted-foreground mb-1">
-                        Input: <code className="text-foreground">{result?.input}</code>
+                        Input: <code className="text-foreground">{result?.status?.message}</code>
                       </div>
                     )}
-                    {result?.expected && (
-                      <div className="text-xs text-muted-foreground mb-1">
-                        Expected: <code className="text-foreground">{result?.expected}</code>
-                      </div>
-                    )}
+
                     {result?.actual && (
                       <div className="text-xs text-muted-foreground">
                         Your Output: <code className={result?.status.current_status.toLowerCase() === "success" ? 'text-success' : 'text-error'}>
@@ -144,12 +140,12 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
               </div>
             )}
 
-            {/* Execution Time */}
+            {/* Execution Time
             {output?.executionTime && (
               <div className="text-xs text-muted-foreground">
                 Execution Time: <span className="text-foreground font-medium">{output?.executionTime}ms</span>
               </div>
-            )}
+            )} */}
           </div>
         )}
       </div>

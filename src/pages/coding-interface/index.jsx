@@ -35,6 +35,7 @@ const CodingInterface = () => {
           input: "",
           expectedOutput: "Hello World",
           actualOutput: null,
+          test_id: 1,
           status: null
         }
       ]
@@ -56,33 +57,36 @@ const CodingInterface = () => {
       ],
       examples: [
         {
-          input: "nums = [2,7,11,15], target = 9",
-          output: "[0,1]",
+          input: "2,7,11,15\n9\n",
+          output: "0,1",
           explanation: "Because nums[0] + nums[1] == 9, we return [0, 1]."
         },
         {
-          input: "nums = [3,2,4], target = 6",
-          output: "[1,2]",
+          input: "3,2,4\n6\n",
+          output: "1,2",
           explanation: "Because nums[1] + nums[2] == 6, we return [1, 2]."
         }
       ],
       publicTestCases: [
         {
-          input: "[2,7,11,15], 9",
-          expectedOutput: "[0,1]",
+          input: "2,7,11,15\n9\n",
+          expectedOutput: "0,1",
           actualOutput: null,
+          test_id: 1,
           status: null
         },
         {
-          input: "[3,2,4], 6",
-          expectedOutput: "[1,2]",
+          input: "3,2,4\n6\n",
+          expectedOutput: "1,2",
           actualOutput: null,
+          test_id: 2,
           status: null
         },
         {
-          input: "[3,3], 6",
-          expectedOutput: "[0,1]",
+          input: "3,3\n6\n",
+          expectedOutput: "0,1",
           actualOutput: null,
+          test_id: 3,
           status: null
         }
       ]
@@ -117,18 +121,21 @@ const CodingInterface = () => {
           input: "[1,2,3,4,5]",
           expectedOutput: "[5,4,3,2,1]",
           actualOutput: null,
+          test_id: 1,
           status: null
         },
         {
           input: "[1,2]",
           expectedOutput: "[2,1]",
           actualOutput: null,
+          test_id: 2,
           status: null
         },
         {
           input: "[]",
           expectedOutput: "[]",
           actualOutput: null,
+          test_id: 3,
           status: null
         }
       ]
@@ -162,18 +169,21 @@ const CodingInterface = () => {
           input: "[[1,4,5],[1,3,4],[2,6]]",
           expectedOutput: "[1,1,2,3,4,4,5,6]",
           actualOutput: null,
+          test_id: 1,
           status: null
         },
         {
           input: "[]",
           expectedOutput: "[]",
           actualOutput: null,
+          test_id: 2,
           status: null
         },
         {
           input: "[[]]",
           expectedOutput: "[]",
           actualOutput: null,
+          test_id: 3,
           status: null
         }
       ]
@@ -210,18 +220,21 @@ const CodingInterface = () => {
       ],
       publicTestCases: [
         {
+          test_id: 1,
           input: '"()"',
           expectedOutput: "true",
           actualOutput: null,
           status: null
         },
         {
+          test_id: 2,
           input: '"()[]{}"',
           expectedOutput: "true",
           actualOutput: null,
           status: null
         },
         {
+          test_id: 3,
           input: '"(]"',
           expectedOutput: "false",
           actualOutput: null,
@@ -254,16 +267,19 @@ const CodingInterface = () => {
           input: "[3,9,20,null,null,15,7]",
           expectedOutput: "[[3],[9,20],[15,7]]",
           actualOutput: null,
+          test_id: 1,
           status: null
         },
         {
           input: "[1]",
-          expectedOutput: "[[1]]",
+          expectedOutput: "",
           actualOutput: null,
+          test_id: 2,
           status: null
         },
         {
           input: "[]",
+          test_id: 3,
           expectedOutput: "[]",
           actualOutput: null,
           status: null
@@ -290,6 +306,7 @@ const CodingInterface = () => {
       publicTestCases: [
         {
           input: "",
+          test_id: 1,
           expectedOutput: "1\n2\n3\n4\n5\n6\n7\n8\n9\n10",
           actualOutput: null,
           status: null
@@ -311,6 +328,7 @@ const CodingInterface = () => {
       examples: [
         {
           input: "100 45",
+
           output: "55",
           explanation: "100 - 45 = 55"
         }
@@ -318,6 +336,7 @@ const CodingInterface = () => {
       publicTestCases: [
         {
           input: "100 45",
+          test_id: 1,
           expectedOutput: "55",
           actualOutput: null,
           status: null
@@ -325,6 +344,7 @@ const CodingInterface = () => {
         {
           input: "50 20",
           expectedOutput: "30",
+          test_id: 2,
           actualOutput: null,
           status: null
         },
@@ -332,17 +352,20 @@ const CodingInterface = () => {
           input: "20 50",
           expectedOutput: "-30",
           actualOutput: null,
+          test_id: 3,
           status: null
         },
         {
           input: "10 10",
           expectedOutput: "0",
+          test_id: 4,
           actualOutput: null,
           status: null
         },
         {
           input: "-10 -5",
           expectedOutput: "-5",
+          test_id: 5,
           actualOutput: null,
           status: null
         }
@@ -415,7 +438,7 @@ const CodingInterface = () => {
       // Prepare test cases
       const tests = selectedProblem?.publicTestCases?.map((tc, index) => ({
         problem_id: String(selectedProblem.id),
-        test_id: String(index),
+        test_id: new String(tc.test_id) ?? "1",
         stdin: tc.input,
         expected_output: tc.expectedOutput
       })) || [];
@@ -428,7 +451,7 @@ const CodingInterface = () => {
         problem_id: String(selectedProblem?.id),
         language: language,
         code: encodedCode,
-        tests: tests
+        tests: tests,
       };
 
       const result = await api.post('/submission/test/public', payload);
