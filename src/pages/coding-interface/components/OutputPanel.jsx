@@ -82,7 +82,7 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
             )}
 
             {/* Complexity & Analysis */}
-            <div className="grid grid-cols-2 gap-4">
+            {output.status === "success" ? (<div className="grid grid-cols-2 gap-4">
               {output?.complexity && (
                 <div className="bg-muted/30 border border-border rounded-lg p-3">
                   <div className="text-xs font-medium text-muted-foreground mb-1">Estimated Time Complexity</div>
@@ -95,7 +95,7 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                   <div className="text-sm font-mono font-semibold text-primary">{output?.executionTime} ms</div>
                 </div>
               )}
-            </div>
+            </div>) : null}
 
             {/* Test Results */}
             {output?.testResults && (

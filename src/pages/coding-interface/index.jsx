@@ -334,7 +334,6 @@ const CodingInterface = () => {
     setOutputVisible(true);
     setOutput(null); // Clear previous output
 
-    const startTime = performance.now();
 
     try {
       // Analyze code locally
@@ -359,6 +358,7 @@ const CodingInterface = () => {
         code: encodedCode,
         tests: tests
       };
+      const startTime = performance.now();
 
       const result = await api.post(`/submission/test/private`, payload);
       const endTime = performance.now();
@@ -413,7 +413,7 @@ const CodingInterface = () => {
     setOutputVisible(true);
     setOutput(null); // Clear previous output
 
-    const startTime = performance.now();
+
 
     try {
       // Analyze code locally
@@ -427,7 +427,7 @@ const CodingInterface = () => {
         stdin: tc.input,
         expected_output: tc.expectedOutput
       })) || [];
-
+      const totalTests = selectedProblem?.publicTestCases?.length
       // Base64 encode code
       const encodedCode = btoa(code);
 
@@ -438,7 +438,7 @@ const CodingInterface = () => {
         code: encodedCode,
         tests: tests
       };
-
+      const startTime = performance.now();
       const result = await api.post(`/submission/test/private`, payload);
       const endTime = performance.now();
       const executionTime = Math.round(endTime - startTime);
@@ -462,6 +462,17 @@ const CodingInterface = () => {
 
       // Let's assume for now we just show the raw output or try to map it.
       // "SUCCESS" matches currentstatus.SUCCESS.ToString()
+      let passedTests = 0
+      if (!isSuccess) {
+        result.results.forEach((result) => {
+          if (result.status.current_status === 'SUCCESS') {
+            passedTests = 1
+          }
+        });
+      } else {
+        passedTests = totalTests
+      }
+
 
       setOutput({
         status: isSuccess ? 'success' : 'error',
@@ -469,7 +480,7 @@ const CodingInterface = () => {
         submissionResults: true,
         passedTests: passedTests,
         failedTests: totalTests - passedTests,
-        score: isSuccess ? selectedProblem?.score : 0,
+        score: isSuccess ? selectedProblem?.score : Math.floor(passedTests/totalTests * selectedProblem?.score),
         totalScore: selectedProblem?.score,
         executionTime: executionTime,
         complexity: complexity,
