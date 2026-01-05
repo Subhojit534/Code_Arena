@@ -493,7 +493,7 @@ const CodingInterface = () => {
       if (!isSuccess) {
         result.results.forEach((result) => {
           if (result.status.current_status === 'SUCCESS') {
-            passedTests = 1
+            passedTests++
           }
         });
       } else {
