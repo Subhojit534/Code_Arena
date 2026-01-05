@@ -14,4 +14,40 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<<<<<<< HEAD
 # Code_Arena
+=======
+
+# Code_Arena
+
+
+https://github.com/user-attachments/assets/f8cdba73-6370-4799-a25a-2cb6c981ec1c
+
+
+## Demo recording
+
+
+
+If you need inline playback in the README, convert the clip to an animated GIF (smaller clips) or add the video as a release asset and link to it.
+
+```json
+{
+    "problem_id": "0",
+    "status": "FAILED",
+    "results": [
+        {
+            "test_id": "0",
+            "status": {
+                "message": "FAILED: Expected output: Hello World. Actual output: Hello World2",
+                "current_status": "FAILED",
+                "stdout": "",
+                "stderr": "",
+                "completed_at": "2025-12-28T10:01:30.119340754Z"
+            },
+            "exec_result_id": "6950fffa9cf2ee9a4bf9b4c5"
+        }
+    ],
+    "error": ""
+}
+```
+>>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
