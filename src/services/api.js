@@ -178,7 +178,7 @@ const api = {
         const backEndEnabled =
             import.meta.env.VITE_MODE === "production"
         if ((url === '/submission/test/public' || url === '/submission/test/private') && backEndEnabled) {
-            const actualUrl = `${import.meta.env.VITE_BACKEND_HOST}${url}`
+            const actualUrl = `${import.meta.env.VITE_BACKEND_HOST ?? 'http://localhost:30080'}${url}`
             const results = await fetch(actualUrl, {
                 method: "POST",
                 headers: {
