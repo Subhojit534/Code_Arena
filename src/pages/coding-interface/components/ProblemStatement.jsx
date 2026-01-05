@@ -20,16 +20,9 @@ const ProblemStatement = ({ problem, activeTestCase, setActiveTestCase }) => {
         <div className="space-y-2">
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-semibold text-foreground">{problem?.title}</h1>
-<<<<<<< HEAD
-            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-              problem?.difficulty === 'Easy' ? 'bg-success/10 text-success' :
-              problem?.difficulty === 'Medium'? 'bg-warning/10 text-warning' : 'bg-error/10 text-error'
-            }`}>
-=======
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${problem?.difficulty === 'Easy' ? 'bg-success/10 text-success' :
-              problem?.difficulty === 'Medium' ? 'bg-warning/10 text-warning' : 'bg-error/10 text-error'
+                problem?.difficulty === 'Medium' ? 'bg-warning/10 text-warning' : 'bg-error/10 text-error'
               }`}>
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
               {problem?.difficulty}
             </span>
           </div>
@@ -77,21 +70,13 @@ const ProblemStatement = ({ problem, activeTestCase, setActiveTestCase }) => {
               <div className="space-y-2">
                 <div>
                   <div className="text-sm text-muted-foreground mb-1">Input:</div>
-<<<<<<< HEAD
-                  <code className="block bg-background px-3 py-2 rounded text-sm font-mono text-foreground">
-=======
                   <code className="block whitespace-pre bg-background px-3 py-2 rounded text-sm font-mono text-foreground">
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
                     {example?.input}
                   </code>
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground mb-1">Output:</div>
-<<<<<<< HEAD
-                  <code className="block bg-background px-3 py-2 rounded text-sm font-mono text-foreground">
-=======
                   <code className="block whitespace-pre bg-background px-3 py-2 rounded text-sm font-mono text-foreground">
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
                     {example?.output}
                   </code>
                 </div>
@@ -114,28 +99,15 @@ const ProblemStatement = ({ problem, activeTestCase, setActiveTestCase }) => {
               <div
                 key={index}
                 onClick={() => setActiveTestCase(index)}
-<<<<<<< HEAD
-                className={`border rounded-lg p-4 cursor-pointer transition-all duration-200 ${
-                  activeTestCase === index
-                    ? 'border-primary bg-primary/5' :'border-border hover:border-primary/50'
-                }`}
-=======
                 className={`border rounded-lg p-4 cursor-pointer transition-all duration-200 ${activeTestCase === index
-                  ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'
+                    ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'
                   }`}
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="font-medium text-foreground">Test Case {index + 1}</div>
                   {testCase?.status && (
-<<<<<<< HEAD
-                    <div className={`flex items-center gap-1 text-sm ${
-                      testCase?.status === 'passed' ? 'text-success' : 'text-error'
-                    }`}>
-=======
                     <div className={`flex items-center gap-1 text-sm ${testCase?.status === 'passed' ? 'text-success' : 'text-error'
                       }`}>
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
                       <Icon name={testCase?.status === 'passed' ? 'CheckCircle2' : 'XCircle'} size={16} />
                       <span className="capitalize">{testCase?.status}</span>
                     </div>
@@ -144,35 +116,21 @@ const ProblemStatement = ({ problem, activeTestCase, setActiveTestCase }) => {
                 <div className="space-y-2">
                   <div>
                     <div className="text-xs text-muted-foreground mb-1">Input:</div>
-<<<<<<< HEAD
-                    <code className="block bg-background px-3 py-2 rounded text-xs font-mono text-foreground">
-=======
-                    <code className="whitespace-pre block bg-background px-3 py-2 rounded text-xs font-mono text-foreground">
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
+                    <code className="block whitespace-pre bg-background px-3 py-2 rounded text-xs font-mono text-foreground">
                       {testCase?.input}
                     </code>
                   </div>
                   <div>
                     <div className="text-xs text-muted-foreground mb-1">Expected Output:</div>
-<<<<<<< HEAD
-                    <code className="block bg-background px-3 py-2 rounded text-xs font-mono text-foreground">
-=======
                     <code className="block whitespace-pre bg-background px-3 py-2 rounded text-xs font-mono text-foreground">
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
                       {testCase?.expectedOutput}
                     </code>
                   </div>
                   {testCase?.actualOutput && (
                     <div>
                       <div className="text-xs text-muted-foreground mb-1">Your Output:</div>
-<<<<<<< HEAD
-                      <code className={`block px-3 py-2 rounded text-xs font-mono ${
-                        testCase?.status === 'passed' ? 'bg-success/10 text-success' : 'bg-error/10 text-error'
-                      }`}>
-=======
-                      <code className={`block px-3 py-2 rounded text-xs font-mono ${testCase?.status === 'passed' ? 'bg-success/10 text-success' : 'bg-error/10 text-error'
+                      <code className={`block whitespace-pre px-3 py-2 rounded text-xs font-mono ${testCase?.status === 'passed' ? 'bg-success/10 text-success' : 'bg-error/10 text-error'
                         }`}>
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
                         {testCase?.actualOutput}
                       </code>
                     </div>

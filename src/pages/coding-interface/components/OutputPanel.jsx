@@ -40,12 +40,8 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
           <div className="space-y-4">
             {/* Status */}
             {output?.status && (
-<<<<<<< HEAD
               <div className={`flex items-center gap-2 text-sm font-medium ${output?.status === 'success' ? 'text-success' :
                 output?.status === 'error' ? 'text-error' : 'text-warning'
-=======
-              <div className={`flex items-center gap-2 text-sm font-medium ${output?.status === 'success' ? 'text-success' : 'text-error'
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
                 }`}>
                 <Icon
                   name={
@@ -85,7 +81,6 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
               </div>
             )}
 
-<<<<<<< HEAD
             {/* Complexity & Analysis */}
             <div className="grid grid-cols-2 gap-4">
               {output?.complexity && (
@@ -102,8 +97,6 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
               )}
             </div>
 
-=======
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
             {/* Test Results */}
             {output?.testResults && (
               <div className="space-y-3">
@@ -111,16 +104,11 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                 {output?.testResults?.map((result, index) => (
                   <div
                     key={index}
-<<<<<<< HEAD
                     className={`border rounded-lg p-3 ${result?.passed ? 'border-success/20 bg-success/5' : 'border-error/20 bg-error/5'
-=======
-                    className={`border rounded-lg p-3 ${result?.status.current_status.toLowerCase() === "success" ? 'border-success/20 bg-success/5' : 'border-error/20 bg-error/5'
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
                       }`}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium text-foreground">
-<<<<<<< HEAD
                         Test Case {index + 1}
                       </span>
                       <div className={`flex items-center gap-1 text-sm ${result?.passed ? 'text-success' : 'text-error'
@@ -143,26 +131,6 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                       <div className="text-xs text-muted-foreground">
                         Your Output: <code className={result?.passed ? 'text-success' : 'text-error'}>
                           {result?.actual}
-=======
-                        Test Case {result.test_id}
-                      </span>
-                      <div className={`flex items-center gap-1 text-sm ${result?.status.current_status.toLowerCase() === "success" ? 'text-success' : 'text-error'
-                        }`}>
-                        <Icon name={result?.status.current_status.toLowerCase() === "success" ? 'CheckCircle2' : 'XCircle'} size={14} />
-                        <span>{result?.status.current_status.toLowerCase() === "success" ? 'Passed' : 'Failed'}</span>
-                      </div>
-                    </div>
-                    {result?.status?.message && (
-                      <div className="text-xs text-muted-foreground mb-1">
-                        Input: <code className="text-foreground">{result?.status?.message}</code>
-                      </div>
-                    )}
-
-                    {result?.actual && (
-                      <div className="text-xs text-muted-foreground">
-                        Your Output: <code className={result?.status.current_status.toLowerCase() === "success" ? 'text-success' : 'text-error'}>
-                          {result?.stdin}
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
                         </code>
                       </div>
                     )}
@@ -193,7 +161,6 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
               </div>
             )}
 
-<<<<<<< HEAD
             {output?.analysisResults && output?.analysisResults?.length > 0 && (
               <div className="bg-muted/30 border border-border rounded-lg p-3">
                 <div className="text-xs font-medium text-muted-foreground mb-2 flex items-center gap-2">
@@ -212,14 +179,6 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                 </div>
               </div>
             )}
-=======
-            {/* Execution Time
-            {output?.executionTime && (
-              <div className="text-xs text-muted-foreground">
-                Execution Time: <span className="text-foreground font-medium">{output?.executionTime}ms</span>
-              </div>
-            )} */}
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           </div>
         )}
       </div>

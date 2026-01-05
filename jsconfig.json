@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-<<<<<<< HEAD
-    "baseUrl": "./src"
-=======
     "baseUrl": "./src",
     "ignoreDeprecations": "6.0"
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
   }
 }

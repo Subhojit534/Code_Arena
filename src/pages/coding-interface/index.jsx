@@ -7,10 +7,7 @@ import CodeEditor from './components/CodeEditor';
 import OutputPanel from './components/OutputPanel';
 import ProblemSidebar from './components/ProblemSidebar';
 import MobileTabView from './components/MobileTabView';
-<<<<<<< HEAD
 import { analyzeCode, estimateComplexity } from '../../utils/codeAnalysis';
-=======
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
 
 const CodingInterface = () => {
   const navigate = useNavigate();
@@ -39,10 +36,6 @@ const CodingInterface = () => {
           input: "",
           expectedOutput: "Hello World",
           actualOutput: null,
-<<<<<<< HEAD
-=======
-          test_id: 1,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           status: null
         }
       ]
@@ -64,7 +57,6 @@ const CodingInterface = () => {
       ],
       examples: [
         {
-<<<<<<< HEAD
           input: "nums = [2,7,11,15], target = 9",
           output: "[0,1]",
           explanation: "Because nums[0] + nums[1] == 9, we return [0, 1]."
@@ -72,21 +64,11 @@ const CodingInterface = () => {
         {
           input: "nums = [3,2,4], target = 6",
           output: "[1,2]",
-=======
-          input: "2,7,11,15\n9\n",
-          output: "0,1",
-          explanation: "Because nums[0] + nums[1] == 9, we return [0, 1]."
-        },
-        {
-          input: "3,2,4\n6\n",
-          output: "1,2",
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           explanation: "Because nums[1] + nums[2] == 6, we return [1, 2]."
         }
       ],
       publicTestCases: [
         {
-<<<<<<< HEAD
           input: "[2,7,11,15], 9",
           expectedOutput: "[0,1]",
           actualOutput: null,
@@ -102,26 +84,6 @@ const CodingInterface = () => {
           input: "[3,3], 6",
           expectedOutput: "[0,1]",
           actualOutput: null,
-=======
-          input: "2,7,11,15\n9\n",
-          expectedOutput: "0,1",
-          actualOutput: null,
-          test_id: 1,
-          status: null
-        },
-        {
-          input: "3,2,4\n6\n",
-          expectedOutput: "1,2",
-          actualOutput: null,
-          test_id: 2,
-          status: null
-        },
-        {
-          input: "3,3\n6\n",
-          expectedOutput: "0,1",
-          actualOutput: null,
-          test_id: 3,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           status: null
         }
       ]
@@ -156,30 +118,18 @@ const CodingInterface = () => {
           input: "[1,2,3,4,5]",
           expectedOutput: "[5,4,3,2,1]",
           actualOutput: null,
-<<<<<<< HEAD
-=======
-          test_id: 1,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           status: null
         },
         {
           input: "[1,2]",
           expectedOutput: "[2,1]",
           actualOutput: null,
-<<<<<<< HEAD
-=======
-          test_id: 2,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           status: null
         },
         {
           input: "[]",
           expectedOutput: "[]",
           actualOutput: null,
-<<<<<<< HEAD
-=======
-          test_id: 3,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           status: null
         }
       ]
@@ -213,30 +163,18 @@ const CodingInterface = () => {
           input: "[[1,4,5],[1,3,4],[2,6]]",
           expectedOutput: "[1,1,2,3,4,4,5,6]",
           actualOutput: null,
-<<<<<<< HEAD
-=======
-          test_id: 1,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           status: null
         },
         {
           input: "[]",
           expectedOutput: "[]",
           actualOutput: null,
-<<<<<<< HEAD
-=======
-          test_id: 2,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           status: null
         },
         {
           input: "[[]]",
           expectedOutput: "[]",
           actualOutput: null,
-<<<<<<< HEAD
-=======
-          test_id: 3,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           status: null
         }
       ]
@@ -273,30 +211,18 @@ const CodingInterface = () => {
       ],
       publicTestCases: [
         {
-<<<<<<< HEAD
-=======
-          test_id: 1,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           input: '"()"',
           expectedOutput: "true",
           actualOutput: null,
           status: null
         },
         {
-<<<<<<< HEAD
-=======
-          test_id: 2,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           input: '"()[]{}"',
           expectedOutput: "true",
           actualOutput: null,
           status: null
         },
         {
-<<<<<<< HEAD
-=======
-          test_id: 3,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           input: '"(]"',
           expectedOutput: "false",
           actualOutput: null,
@@ -329,123 +255,21 @@ const CodingInterface = () => {
           input: "[3,9,20,null,null,15,7]",
           expectedOutput: "[[3],[9,20],[15,7]]",
           actualOutput: null,
-<<<<<<< HEAD
-=======
-          test_id: 1,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           status: null
         },
         {
           input: "[1]",
-<<<<<<< HEAD
           expectedOutput: "[[1]]",
           actualOutput: null,
-=======
-          expectedOutput: "",
-          actualOutput: null,
-          test_id: 2,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           status: null
         },
         {
           input: "[]",
-<<<<<<< HEAD
-=======
-          test_id: 3,
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
           expectedOutput: "[]",
           actualOutput: null,
           status: null
         }
       ]
-<<<<<<< HEAD
-=======
-    },
-    {
-      id: 6,
-      title: "Print 1 to 10",
-      difficulty: "Easy",
-      score: 10,
-      submissions: 0,
-      successRate: 100,
-      solved: false,
-      description: "Write a program that prints the numbers from 1 to 10, each on a new line.",
-      constraints: [],
-      examples: [
-        {
-          input: "",
-          output: "1\\n2\\n3\\n4\\n5\\n6\\n7\\n8\\n9\\n10",
-          explanation: "Prints numbers 1 to 10 sequentially."
-        }
-      ],
-      publicTestCases: [
-        {
-          input: "",
-          test_id: 1,
-          expectedOutput: "1\n2\n3\n4\n5\n6\n7\n8\n9\n10",
-          actualOutput: null,
-          status: null
-        }
-      ]
-    },
-    {
-      id: 7,
-      title: "Simple Subtraction",
-      difficulty: "Easy",
-      score: 10,
-      submissions: 0,
-      successRate: 100,
-      solved: false,
-      description: "Read two integers from input and print their difference (first - second).",
-      constraints: [
-        "-1000 ≤ a, b ≤ 1000"
-      ],
-      examples: [
-        {
-          input: "100 45",
-
-          output: "55",
-          explanation: "100 - 45 = 55"
-        }
-      ],
-      publicTestCases: [
-        {
-          input: "100 45",
-          test_id: 1,
-          expectedOutput: "55",
-          actualOutput: null,
-          status: null
-        },
-        {
-          input: "50 20",
-          expectedOutput: "30",
-          test_id: 2,
-          actualOutput: null,
-          status: null
-        },
-        {
-          input: "20 50",
-          expectedOutput: "-30",
-          actualOutput: null,
-          test_id: 3,
-          status: null
-        },
-        {
-          input: "10 10",
-          expectedOutput: "0",
-          test_id: 4,
-          actualOutput: null,
-          status: null
-        },
-        {
-          input: "-10 -5",
-          expectedOutput: "-5",
-          test_id: 5,
-          actualOutput: null,
-          status: null
-        }
-      ]
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
     }
   ];
 
@@ -510,7 +334,6 @@ const CodingInterface = () => {
     setOutputVisible(true);
     setOutput(null); // Clear previous output
 
-<<<<<<< HEAD
     const startTime = performance.now();
 
     try {
@@ -522,13 +345,6 @@ const CodingInterface = () => {
       const tests = selectedProblem?.publicTestCases?.map((tc, index) => ({
         problem_id: String(selectedProblem.id),
         test_id: String(index),
-=======
-    try {
-      // Prepare test cases
-      const tests = selectedProblem?.publicTestCases?.map((tc, index) => ({
-        problem_id: String(selectedProblem.id),
-        test_id: new String(tc.test_id) ?? "1",
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
         stdin: tc.input,
         expected_output: tc.expectedOutput
       })) || [];
@@ -541,7 +357,6 @@ const CodingInterface = () => {
         problem_id: String(selectedProblem?.id),
         language: language,
         code: encodedCode,
-<<<<<<< HEAD
         tests: tests
       };
 
@@ -550,13 +365,6 @@ const CodingInterface = () => {
       const executionTime = Math.round(endTime - startTime);
 
       const result = response.data;
-=======
-        tests: tests,
-      };
-
-      const result = await api.post('/submission/test/public', payload);
-      console.log(result);
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
       // result structure from backend: { Status: "...", Results: [...], Error: "..." }
 
       // Map backend results to frontend format
@@ -576,7 +384,6 @@ const CodingInterface = () => {
       // Let's assume for now we just show the raw output or try to map it.
       // "SUCCESS" matches currentstatus.SUCCESS.ToString()
 
-<<<<<<< HEAD
       let testResults = [];
       if (result.results && Array.isArray(result.results)) {
         testResults = result.results.map((r, i) => ({
@@ -610,17 +417,6 @@ const CodingInterface = () => {
         executionTime: executionTime,
         complexity: complexity,
         analysisResults: analysisResults
-=======
-
-
-      setOutput({
-        status: isSuccess ? 'success' : 'error',
-        message: isSuccess
-          ? 'All public test cases passed! Ready to submit.'
-          : (result.error || 'Some test cases failed. Review your code and try again.'),
-        testResults: result.results,
-        executionTime: 0 // Backend doesn't seem to return time yet
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
       });
 
     } catch (error) {
@@ -641,7 +437,6 @@ const CodingInterface = () => {
     setOutputVisible(true);
     setOutput(null);
 
-<<<<<<< HEAD
     const startTime = performance.now();
 
     try {
@@ -649,9 +444,6 @@ const CodingInterface = () => {
       const complexity = estimateComplexity(code, language);
       const analysisResults = analyzeCode(code, language);
 
-=======
-    try {
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
       // Mock logic for private tests: sending public tests as placeholder logic
       // because frontend doesn't have private tests.
       const tests = selectedProblem?.publicTestCases?.map((tc, index) => ({
@@ -671,7 +463,6 @@ const CodingInterface = () => {
         tests: tests
       };
 
-<<<<<<< HEAD
       const response = await api.post('/submission/test/private', payload);
       const endTime = performance.now();
       const executionTime = Math.round(endTime - startTime);
@@ -704,39 +495,6 @@ const CodingInterface = () => {
         analysisResults: analysisResults
       });
 
-=======
-      const result = await api.post('/submission/test/public', payload);
-      console.log(result);
-      // result structure from backend: { Status: "...", Results: [...], Error: "..." }
-
-      // Map backend results to frontend format
-      const isSuccess = result.status === 'SUCCESS'; // check specific enum string in backend? "Success"?
-
-      // We need to parse the backend results to match frontend expectations
-      // Backend Results: []ExecResult. ExecResult: { stdout: "...", stderr: "...", exit_code: 0 }
-      // Test cases loop?
-
-      // Wait, backend logic: k8s.RunOnPod(submission) -> extractJsonFromStdout.
-      // The runner inside the pod executes the code against inputs?
-      // Runner Implementation detail: The runner seems to just run one thing?
-      // Re-reading submission_controller: `res, err := k8s.K8sMgr.RunOnPod(submission)`
-      // RunOnPod sends logic. 
-      // Need to see what `RunOnPod` returns in `Results`.
-
-      // Let's assume for now we just show the raw output or try to map it.
-      // "SUCCESS" matches currentstatus.SUCCESS.ToString()
-
-
-
-      setOutput({
-        status: isSuccess ? 'success' : 'error',
-        message: isSuccess
-          ? 'All public test cases passed! Ready to submit.'
-          : (result.error || 'Some test cases failed. Review your code and try again.'),
-        testResults: result.results,
-        executionTime: 0 // Backend doesn't seem to return time yet
-      });
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
     } catch (error) {
       console.error("Submission error:", error);
       setOutput({
@@ -835,8 +593,4 @@ const CodingInterface = () => {
   );
 };
 
-<<<<<<< HEAD
 export default CodingInterface;
-=======
-export default CodingInterface;
->>>>>>> 85e693d325ac80180b5a0cb1b031beadf1d22dce
