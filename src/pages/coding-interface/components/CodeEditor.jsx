@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Select from '../../../components/ui/Select';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import Editor from 'react-simple-code-editor';
 
 const CodeEditor = ({
   code,
@@ -24,6 +26,20 @@ const CodeEditor = ({
     { value: 'rust', label: 'Rust 1.65' }
   ];
 
+  const highlight = (code) => (
+    <SyntaxHighlighter language={language} customStyle={{
+      backgroundColor: "transparent", paddingTop: "0px", marginTop: "0px", marginLeft: "0px", paddingLeft: "0px", fontSize: 14, lineHeight: 1.5, fontFamily: "'Jetbrains Mono', monospace"
+    }} showInlineLineNumbers:true codeTagProps={{
+      style: {
+        fontFamily: "'Jetbrains Mono', monospace",
+        fontSize: "14px",
+        lineHeight: "1.5",
+      }
+    }}>
+      {code}
+    </SyntaxHighlighter>
+
+  )
   const languageTemplates = {
     python: `def solution():\n    # Write your code here\n    pass\n\nif __name__ == "__main__":\n    solution()`,
     javascript: `function solution() {\n    // Write your code here\n}\n\nsolution();`,
@@ -109,12 +125,12 @@ const CodeEditor = ({
         </div>
       </div>
       {/* Editor Content */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden p-0 m-0">
         {/* Line Numbers */}
-        <div className="w-12 bg-muted/50 border-r border-border overflow-hidden">
-          <div className="py-4 px-2 text-right font-mono text-xs text-muted-foreground select-none">
+        <div className="w-12 bg-muted/50 border-r border-border overflow-hidden m-0 font-mono pr-1 pt-2.5">
+          <div className="text-right font-mono text-muted-foreground select-none" style={{ fontFamily: "monospace", fontSize: 14, lineHeight: "1.5" }}>
             {Array.from({ length: lineCount }, (_, i) => (
-              <div key={i + 1} className="leading-6">
+              <div key={i + 1} className="font-mono" style={{lineHeight: 1.5}}>
                 {i + 1}
               </div>
             ))}
@@ -123,14 +139,19 @@ const CodeEditor = ({
 
         {/* Code Area */}
         <div className="flex-1 overflow-auto">
-          <textarea
+          <Editor
             value={code}
-            onChange={(e) => setCode(e?.target?.value)}
-            onKeyDown={handleKeyDown}
-            className="w-full h-full p-4 bg-transparent text-foreground font-mono text-sm leading-6 resize-none focus:outline-none"
-            spellCheck="false"
-            placeholder="Start coding here..."
+            onValueChange={code => setCode(code)}
+            highlight={highlight}
+            padding={10} // Ensure this is the same for both
+            style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: 14,
+              lineHeight: '1.5', // USE A UNITLESS NUMBER (best for cross-browser consistency)
+            }}
+            className='code'
           />
+
         </div>
       </div>
     </div>

@@ -104,36 +104,25 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                 {output?.testResults?.map((result, index) => (
                   <div
                     key={index}
-                    className={`border rounded-lg p-3 ${result?.passed ? 'border-success/20 bg-success/5' : 'border-error/20 bg-error/5'
+                    className={`border rounded-lg p-3 ${result?.status?.current_status === "SUCCESS" ? 'border-success/20 bg-success/5' : 'border-error/20 bg-error/5'
                       }`}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium text-foreground">
                         Test Case {index + 1}
                       </span>
-                      <div className={`flex items-center gap-1 text-sm ${result?.passed ? 'text-success' : 'text-error'
+                      <div className={`flex items-center gap-1 text-sm ${result?.status?.current_status === "SUCCESS" ? 'text-success' : 'text-error'
                         }`}>
-                        <Icon name={result?.passed ? 'CheckCircle2' : 'XCircle'} size={14} />
-                        <span>{result?.passed ? 'Passed' : 'Failed'}</span>
+                        <Icon name={result?.status?.current_status === "SUCCESS" ? 'CheckCircle2' : 'XCircle'} size={14} />
+                        <span>{result?.status?.current_status === "SUCCESS" ? 'Passed' : 'Failed'}</span>
                       </div>
                     </div>
-                    {result?.input && (
+                    {result?.status?.message && (
                       <div className="text-xs text-muted-foreground mb-1">
-                        Input: <code className="text-foreground">{result?.input}</code>
+                        <code className="text-foreground">{result?.status?.message}</code>
                       </div>
                     )}
-                    {result?.expected && (
-                      <div className="text-xs text-muted-foreground mb-1">
-                        Expected: <code className="text-foreground">{result?.expected}</code>
-                      </div>
-                    )}
-                    {result?.actual && (
-                      <div className="text-xs text-muted-foreground">
-                        Your Output: <code className={result?.passed ? 'text-success' : 'text-error'}>
-                          {result?.actual}
-                        </code>
-                      </div>
-                    )}
+
                   </div>
                 ))}
               </div>
