@@ -270,7 +270,34 @@ const CodingInterface = () => {
           status: null
         }
       ]
-    }
+    },
+    {
+      id: 6,
+      title: "Print 1 to 10",
+      difficulty: "Easy",
+      score: 10,
+      submissions: 0,
+      successRate: 100,
+      solved: false,
+      description: "Write a program that prints the numbers from 1 to 10, each on a new line.",
+      constraints: [],
+      examples: [
+        {
+          input: "",
+          output: "1\n2\n3\n4\n5\n6\n7\n8\n9\n10",
+          explanation: "Prints numbers 1 to 10 sequentially."
+        }
+      ],
+      publicTestCases: [
+        {
+          input: "",
+          test_id: 1,
+          expectedOutput: "1\n2\n3\n4\n5\n6\n7\n8\n9\n10",
+          actualOutput: null,
+          status: null
+        }
+      ]
+    },
   ];
 
   const [problems, setProblems] = useState(initialMockProblems);
@@ -480,7 +507,7 @@ const CodingInterface = () => {
         submissionResults: true,
         passedTests: passedTests,
         failedTests: totalTests - passedTests,
-        score: isSuccess ? selectedProblem?.score : Math.floor(passedTests/totalTests * selectedProblem?.score),
+        score: isSuccess ? selectedProblem?.score : Math.floor(passedTests / totalTests * selectedProblem?.score),
         totalScore: selectedProblem?.score,
         executionTime: executionTime,
         complexity: complexity,

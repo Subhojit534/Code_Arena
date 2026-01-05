@@ -76,7 +76,7 @@ const ProblemStatement = ({ problem, activeTestCase, setActiveTestCase }) => {
                 </div>
                 <div>
                   <div className="text-sm text-muted-foreground mb-1">Output:</div>
-                  <code className="block whitespace-pre bg-background px-3 py-2 rounded text-sm font-mono text-foreground">
+                  <code className="block bg-background px-3 py-2 rounded text-sm font-mono text-foreground whitespace-pre">
                     {example?.output}
                   </code>
                 </div>
