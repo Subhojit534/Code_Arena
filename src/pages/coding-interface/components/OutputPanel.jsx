@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Icon from '../../../components/AppIcon';
+import ProgressIndicator from 'components/ProgressIndicator';
 
 const OutputPanel = ({ output, isVisible, onToggle }) => {
+  const [aiSummary, setAiSummary] = useState({})
+  useEffect(() => {
+    setAiSummary({})
+    if (isVisible && output && (output.score || output.score == 0)) {
+      output.aiSummaryPromise.then((aiSummary) => {
+        setAiSummary(aiSummary)
+      })
+    }
+  }, [output, isVisible])
+
   if (!isVisible) {
     return (
       <button
@@ -83,24 +94,26 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
 
             {/* Complexity & Analysis */}
             {output.status === "success" ? (<div className='grid grid-flow-col-dense gap-4'>
-              {output?.complexity && (
-                <div className="bg-muted/30 border border-border rounded-lg p-3">
-                  <div className="text-xs font-medium text-muted-foreground mb-1">Estimated Time Complexity</div>
-                  <div className="text-sm font-mono font-semibold text-primary">{output?.complexity}</div>
-                </div>
-              )}
+
+              <div className="bg-muted/30 border border-border rounded-lg p-3">
+                <div className="text-xs font-medium text-muted-foreground mb-1">Estimated Time Complexity</div>
+                {((aiSummary && aiSummary?.timeComplexity) || output?.complexity) ? (<div className="text-sm font-mono font-semibold text-primary">
+                  {output?.complexity ? output.complexity : aiSummary.timeComplexity == "N/A" ? output?.estimatedTimeComplexity : aiSummary.timeComplexity}</div>) : (<ProgressIndicator />)}
+              </div>
+
               {output?.avgTime !== undefined && (
                 <div className="bg-muted/30 border border-border rounded-lg p-3">
                   <div className="text-xs font-medium text-muted-foreground mb-1">Average Execution Time</div>
                   <div className="text-sm font-mono font-semibold text-primary">{output?.avgTime} ms</div>
                 </div>
               )}
-              {output.submissionResults && output?.totalExecutionTime !== undefined && (
-                <div className="bg-muted/30 border border-border rounded-lg p-3">
-                  <div className="text-xs font-medium text-muted-foreground mb-1">Total Execution Time</div>
-                  <div className="text-sm font-mono font-semibold text-primary">{output?.totalExecutionTime} ms</div>
-                </div>
-              )}
+
+              <div className="bg-muted/30 border border-border rounded-lg p-3">
+                <div className="text-xs font-medium text-muted-foreground mb-1">Estimated Space Complexity</div>
+                {(aiSummary && aiSummary?.spaceComplexity || output?.complexity) ? (<div className="text-sm font-mono font-semibold text-primary">
+                  {aiSummary?.spaceComplexity ?? 'N/A'}</div>) : (<ProgressIndicator />)}
+              </div>
+
             </div>) : null}
 
             {/* Test Results */}
@@ -169,21 +182,14 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
               </div>
             )}
 
-            {output?.analysisResults && output?.analysisResults?.length > 0 && (
+            {aiSummary.timeComplexity && (
               <div className="bg-muted/30 border border-border rounded-lg p-3">
                 <div className="text-xs font-medium text-muted-foreground mb-2 flex items-center gap-2">
                   <Icon name="Activity" size={14} />
                   Code Analysis
                 </div>
-                <div className="space-y-2">
-                  {output?.analysisResults.map((item, idx) => (
-                    <div key={idx} className={`text-xs flex items-start gap-2 ${item.type === 'warning' ? 'text-warning' :
-                      item.type === 'error' ? 'text-error' : 'text-muted-foreground'
-                      }`}>
-                      <Icon name={item.type === 'warning' ? 'AlertTriangle' : 'Info'} size={12} className="mt-0.5" />
-                      <span>{item.message}</span>
-                    </div>
-                  ))}
+                <div className="space-y-2 whitespace-pre-wrap">
+                  {aiSummary.suggestion ? (<div>{aiSummary.suggestion == "N/A" ? "No Analysis Available" : aiSummary.suggestion == "none" ? "Code is clean!" : aiSummary.suggestion}</div>) : (<ProgressIndicator />)}
                 </div>
               </div>
             )}

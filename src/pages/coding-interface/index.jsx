@@ -8,9 +8,14 @@ import OutputPanel from './components/OutputPanel';
 import ProblemSidebar from './components/ProblemSidebar';
 import MobileTabView from './components/MobileTabView';
 import { analyzeCode, estimateComplexity } from '../../utils/codeAnalysis';
+import CodeReview from 'apis/code_review';
+import { AIPayload } from 'models/ai';
+
+const codeReview = new CodeReview()
 
 const CodingInterface = () => {
   const navigate = useNavigate();
+
 
   // Mock problems data
   const initialMockProblems = [
@@ -385,8 +390,6 @@ const CodingInterface = () => {
         code: encodedCode,
         tests: tests
       };
-      const startTime = performance.now();
-
       const result = await api.post(`/submission/test/private`, payload);
 
       const isSuccess = result.status === 'SUCCESS';
@@ -434,8 +437,7 @@ const CodingInterface = () => {
 
     try {
       // Analyze code locally
-      const complexity = estimateComplexity(code, language);
-      const analysisResults = analyzeCode(code, language);
+      // const complexity = estimateComplexity(code, language);
 
       // Prepare test cases
       const tests = selectedProblem?.publicTestCases?.map((tc, index) => ({
@@ -456,6 +458,8 @@ const CodingInterface = () => {
         tests: tests
       };
       const result = await api.post(`/submission/test/private`, payload);
+      const aiSummaryPromise = codeReview.getReview(new AIPayload({ code: code, language: language, message: result.error ? result.error : result.status, question: selectedProblem.description }))
+
 
       const isSuccess = result.status === 'SUCCESS';
       var avgTime = 0
@@ -505,9 +509,9 @@ const CodingInterface = () => {
         score: isSuccess ? selectedProblem?.score : Math.floor(passedTests / totalTests * selectedProblem?.score),
         totalScore: selectedProblem?.score,
         totalExecutionTime: totalExecutionTime,
+        estimatedTimeComplexity: estimateComplexity(code),
         avgTime: Math.round(avgTime),
-        complexity: complexity,
-        analysisResults: analysisResults
+        aiSummaryPromise: aiSummaryPromise,
       });
 
     } catch (error) {
