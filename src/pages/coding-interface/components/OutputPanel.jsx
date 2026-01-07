@@ -82,17 +82,23 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
             )}
 
             {/* Complexity & Analysis */}
-            {output.status === "success" ? (<div className="grid grid-cols-2 gap-4">
+            {output.status === "success" ? (<div className='grid grid-flow-col-dense gap-4'>
               {output?.complexity && (
                 <div className="bg-muted/30 border border-border rounded-lg p-3">
                   <div className="text-xs font-medium text-muted-foreground mb-1">Estimated Time Complexity</div>
                   <div className="text-sm font-mono font-semibold text-primary">{output?.complexity}</div>
                 </div>
               )}
-              {output?.executionTime !== undefined && (
+              {output?.avgTime !== undefined && (
                 <div className="bg-muted/30 border border-border rounded-lg p-3">
-                  <div className="text-xs font-medium text-muted-foreground mb-1">Execution Time</div>
-                  <div className="text-sm font-mono font-semibold text-primary">{output?.executionTime} ms</div>
+                  <div className="text-xs font-medium text-muted-foreground mb-1">Average Execution Time</div>
+                  <div className="text-sm font-mono font-semibold text-primary">{output?.avgTime} ms</div>
+                </div>
+              )}
+              {output.submissionResults && output?.totalExecutionTime !== undefined && (
+                <div className="bg-muted/30 border border-border rounded-lg p-3">
+                  <div className="text-xs font-medium text-muted-foreground mb-1">Total Execution Time</div>
+                  <div className="text-sm font-mono font-semibold text-primary">{output?.totalExecutionTime} ms</div>
                 </div>
               )}
             </div>) : null}
@@ -107,7 +113,7 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                     className={`border rounded-lg p-3 ${result?.status?.current_status === "SUCCESS" ? 'border-success/20 bg-success/5' : 'border-error/20 bg-error/5'
                       }`}
                   >
-                    <div className="flex items-center justify-between mb-2">
+                    <div className="flex justify-between mb-2">
                       <span className="text-sm font-medium text-foreground">
                         Test Case {index + 1}
                       </span>
@@ -116,13 +122,26 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                         <Icon name={result?.status?.current_status === "SUCCESS" ? 'CheckCircle2' : 'XCircle'} size={14} />
                         <span>{result?.status?.current_status === "SUCCESS" ? 'Passed' : 'Failed'}</span>
                       </div>
+
                     </div>
-                    {result?.status?.message && (
+                    {result?.status?.current_status === "SUCCESS" ? (
                       <div className="text-xs text-muted-foreground mb-1">
                         <code className="text-foreground">{result?.status?.message}</code>
                       </div>
+                    ) : ((
+                      <>
+                        <div className="text-xs text-muted-foreground mb-1">
+                          Expected: <code className="text-foreground">{result?.status?.expected_output}</code>
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          Your Output: <code className={result?.status?.current_status === "SUCCESS" ? 'text-success' : 'text-error'}>
+                            {result?.status?.stdout}
+                          </code>
+                        </div>
+                      </>
+                    )
                     )}
-
+                    <div className='text-xs font-medium text-foreground py-3'>Execution Time: {result?.status.exec_time_ms}ms</div>
                   </div>
                 ))}
               </div>
@@ -168,6 +187,7 @@ const OutputPanel = ({ output, isVisible, onToggle }) => {
                 </div>
               </div>
             )}
+
           </div>
         )}
       </div>

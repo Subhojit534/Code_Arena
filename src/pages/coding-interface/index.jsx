@@ -389,27 +389,14 @@ const CodingInterface = () => {
 
       const result = await api.post(`/submission/test/private`, payload);
       const endTime = performance.now();
-      const executionTime = Math.round(endTime - startTime);
 
+      var avgTime = 0
+      result?.results?.forEach((result) => avgTime = avgTime + result?.status?.exec_time_ms ?? 0)
+      const totalExecutionTime = avgTime
+      avgTime = avgTime / result?.results.length
+   
+      const isSuccess = result.status === 'SUCCESS'; 
 
-      // result structure from backend: { Status: "...", Results: [...], Error: "..." }
-
-      // Map backend results to frontend format
-      const isSuccess = result.status === 'SUCCESS'; // check specific enum string in backend? "Success"?
-
-      // We need to parse the backend results to match frontend expectations
-      // Backend Results: []ExecResult. ExecResult: { stdout: "...", stderr: "...", exit_code: 0 }
-      // Test cases loop?
-
-      // Wait, backend logic: k8s.RunOnPod(submission) -> extractJsonFromStdout.
-      // The runner inside the pod executes the code against inputs?
-      // Runner Implementation detail: The runner seems to just run one thing?
-      // Re-reading submission_controller: `res, err := k8s.K8sMgr.RunOnPod(submission)`
-      // RunOnPod sends logic. 
-      // Need to see what `RunOnPod` returns in `Results`.
-
-      // Let's assume for now we just show the raw output or try to map it.
-      // "SUCCESS" matches currentstatus.SUCCESS.ToString()
 
       setOutput({
         status: isSuccess ? 'success' : 'error',
@@ -417,7 +404,8 @@ const CodingInterface = () => {
           ? 'All public test cases passed! Ready to submit.'
           : (result.error || 'Some test cases failed. Review your code and try again.'),
         testResults: result.results,
-        executionTime: executionTime,
+        avgTime: Math.round(avgTime),
+        totalExecutionTime: totalExecutionTime,
         complexity: complexity,
         analysisResults: analysisResults
       });
@@ -468,8 +456,11 @@ const CodingInterface = () => {
       const startTime = performance.now();
       const result = await api.post(`/submission/test/private`, payload);
       const endTime = performance.now();
-      const executionTime = Math.round(endTime - startTime);
 
+      var avgTime = 0
+      result?.results?.forEach((result) => avgTime = avgTime + result?.status?.exec_time_ms ?? 0)
+      const totalExecutionTime = avgTime
+      avgTime = avgTime / result?.results.length
 
       // result structure from backend: { Status: "...", Results: [...], Error: "..." }
 
@@ -509,7 +500,8 @@ const CodingInterface = () => {
         failedTests: totalTests - passedTests,
         score: isSuccess ? selectedProblem?.score : Math.floor(passedTests / totalTests * selectedProblem?.score),
         totalScore: selectedProblem?.score,
-        executionTime: executionTime,
+        totalExecutionTime: totalExecutionTime,
+        avgTime: Math.round(avgTime),
         complexity: complexity,
         analysisResults: analysisResults
       });

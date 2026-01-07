@@ -29,7 +29,7 @@ const CodeEditor = ({
   const highlight = (code) => (
     <SyntaxHighlighter language={language} customStyle={{
       backgroundColor: "transparent", paddingTop: "0px", marginTop: "0px", marginLeft: "0px", paddingLeft: "0px", fontSize: 14, lineHeight: 1.5, fontFamily: "'Jetbrains Mono', monospace"
-    }} showInlineLineNumbers:true codeTagProps={{
+    }} codeTagProps={{
       style: {
         fontFamily: "'Jetbrains Mono', monospace",
         fontSize: "14px",
@@ -130,7 +130,7 @@ const CodeEditor = ({
         <div className="w-12 bg-muted/50 border-r border-border overflow-hidden m-0 font-mono pr-1 pt-2.5">
           <div className="text-right font-mono text-muted-foreground select-none" style={{ fontFamily: "monospace", fontSize: 14, lineHeight: "1.5" }}>
             {Array.from({ length: lineCount }, (_, i) => (
-              <div key={i + 1} className="font-mono" style={{lineHeight: 1.5}}>
+              <div key={i + 1} className="font-mono" style={{ lineHeight: 1.5 }}>
                 {i + 1}
               </div>
             ))}

@@ -189,34 +189,34 @@ const api = {
             }).then((res) => res.json()).catch((e) => console.log(e))
             console.log(results)
             return new Result(results)
-        } else {
+        } else if (url === '/submission/test/public' || url === '/submission/test/private') {
             await mockDelay(800);
             return new Result({
                 "problem_id": "69",
                 "status": "SUCCESS",
                 "results": [{
-                        "test_id": "1",
-                        "status": {
-                            "message": "Test: #1 Passed",
-                            "current_status": "SUCCESS",
-                            "stdout": "",
-                            "stderr": "",
-                            "completed_at": "2026-01-05T21:39:34.876312586Z"
-                        },
-                        "exec_result_id": "695c2f9686ced6c6f6308d93"
+                    "test_id": "1",
+                    "status": {
+                        "message": "Test: #1 Passed",
+                        "current_status": "SUCCESS",
+                        "stdout": "",
+                        "exec_time_ms": 10,
+                        "stderr": "",
+                        "completed_at": "2026-01-05T21:39:34.876312586Z"
                     },
-                    {
-                        "test_id": "2",
-                        "status": {
-                            "message": "Test: #2 Passed",
-                            "current_status": "SUCCESS",
-                            "stdout": "",
-                            "stderr": "",
-                            "completed_at": "2026-01-05T21:39:34.87677458Z"
-                        },
-                        "exec_result_id": "695c2f9686ced6c6f6308d94"
-                    }
-                ],
+                    "exec_result_id": "695c2f9686ced6c6f6308d93",
+                }, {
+                    "test_id": "2",
+                    "status": {
+                        "message": "Test: #2 Passed",
+                        "current_status": "SUCCESS",
+                        "stdout": "",
+                        "stderr": "",
+                        "exec_time_ms": 10,
+                        "completed_at": "2026-01-05T21:39:34.87677458Z"
+                    },
+                    "exec_result_id": "695c2f9686ced6c6f6308d94"
+                }],
                 "error": ""
             })
         }

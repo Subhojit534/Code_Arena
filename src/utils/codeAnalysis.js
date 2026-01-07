@@ -105,12 +105,12 @@ export const analyzeCode = (code) => {
     const suggestions = [];
     const cleanCode = code.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '');
 
-    if (cleanCode.includes('console.log') || cleanCode.includes('print(')) {
-        suggestions.push({
-            type: 'warning',
-            message: 'Remove print/console debugging statements before submission.'
-        });
-    }
+    // if (cleanCode.includes('console.log') || cleanCode.includes('print(')) {
+    //     suggestions.push({
+    //         type: 'warning',
+    //         message: 'Remove print/console debugging statements before submission.'
+    //     });
+    // }
 
     // Check for basic recursion without base case (hard to detect perfectly, but maybe check for function name inside itself?)
     // Skipping complex checks.
@@ -123,15 +123,18 @@ export const analyzeCode = (code) => {
     }
 
     // Variable naming (very basic, e.g. single letters)
-    //   if (cleanCode.match(/\b(?:let|var|const|int|float)\s+[a-z]\s*=/)) {
-    //       suggestions.push({
-    //           type: 'info', // generic advice
-    //           message: 'Use descriptive variable names instead of single letters.'
-    //       });
-    //   }
+    if (cleanCode.match(/\b(?:let|var|const|int|float)\s+[a-z]\s*=/)) {
+        suggestions.push({
+            type: 'info', // generic advice
+            message: 'Use descriptive variable names instead of single letters.'
+        });
+    }
 
     if (suggestions.length === 0) {
-        suggestions.push({ type: 'success', message: 'Code looks clean!' });
+        suggestions.push({
+            type: 'success',
+            message: 'Code looks clean!'
+        });
     }
 
     return suggestions;

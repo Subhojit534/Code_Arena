@@ -25,7 +25,9 @@ class Status {
         this.message = status.message
         this.current_status = status.current_status
         this.stdout = status.stdout
+        this.expected_output = status.expected_output   
         this.stderr = status.stderr
+        this.exec_time_ms = status.exec_time_ms
         this.completed_at = status.completed_at
     }
 }
