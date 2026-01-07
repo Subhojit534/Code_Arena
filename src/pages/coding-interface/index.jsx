@@ -388,14 +388,16 @@ const CodingInterface = () => {
       const startTime = performance.now();
 
       const result = await api.post(`/submission/test/private`, payload);
-      const endTime = performance.now();
 
+      const isSuccess = result.status === 'SUCCESS';
       var avgTime = 0
-      result?.results?.forEach((result) => avgTime = avgTime + result?.status?.exec_time_ms ?? 0)
-      const totalExecutionTime = avgTime
-      avgTime = avgTime / result?.results.length
-   
-      const isSuccess = result.status === 'SUCCESS'; 
+      var totalExecutionTime = avgTime
+      if (isSuccess) {
+        result?.results?.forEach((result) => avgTime = avgTime + result?.status?.exec_time_ms ?? 0)
+        totalExecutionTime = avgTime
+        avgTime = avgTime / result?.results.length
+      }
+
 
 
       setOutput({
@@ -453,19 +455,21 @@ const CodingInterface = () => {
         code: encodedCode,
         tests: tests
       };
-      const startTime = performance.now();
       const result = await api.post(`/submission/test/private`, payload);
-      const endTime = performance.now();
 
+      const isSuccess = result.status === 'SUCCESS';
       var avgTime = 0
-      result?.results?.forEach((result) => avgTime = avgTime + result?.status?.exec_time_ms ?? 0)
-      const totalExecutionTime = avgTime
-      avgTime = avgTime / result?.results.length
+      var totalExecutionTime = avgTime
+      if (isSuccess) {
+        result?.results?.forEach((result) => avgTime = avgTime + result?.status?.exec_time_ms ?? 0)
+        totalExecutionTime = avgTime
+        avgTime = avgTime / result?.results.length
+      }
 
       // result structure from backend: { Status: "...", Results: [...], Error: "..." }
 
       // Map backend results to frontend format
-      const isSuccess = result.status === 'SUCCESS'; // check specific enum string in backend? "Success"?
+      // check specific enum string in backend? "Success"?
 
       // We need to parse the backend results to match frontend expectations
       // Backend Results: []ExecResult. ExecResult: { stdout: "...", stderr: "...", exit_code: 0 }
