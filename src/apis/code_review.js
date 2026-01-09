@@ -70,7 +70,7 @@ class CodeReview {
           Provide the output only as valid JSON object. Do not include any text, explanation or comments in code or outside, make everything concise in "explantions" part.
           Use this JSON schema:
           "corrected_code": "string"
-          "explanations": "string make it breif"
+          "explanation": "string make it breif and concise"
           ---
           **Input Data for Analysis:**
           ${JSON.stringify(aiOutputPayload)}
