@@ -2,7 +2,8 @@ import {
     GoogleGenerativeAI
 } from "@google/generative-ai";
 import {
-    AISummary
+    AISummary,
+    AICodeCorrectSummary,
 } from "models/ai";
 
 class CodeReview {
@@ -86,7 +87,7 @@ class CodeReview {
             const rawJson = response.text()
 
             if(!rawJson){
-                return new AICodeCorrect({
+                return new AICodeCorrectSummary({
                      "corrected_code": "",
                      "explanation": ""
                 })
@@ -95,11 +96,11 @@ class CodeReview {
             const cleanedJson = rawjson.replace(/```json\n|```/g, '').trim()
             const parseJson = JSON.parse(cleanedJson)
             
-            return new AICodeCorrect(parseJson)
+            return new AICodeCorrectSummary(parseJson)
         }catch(err){
              console.log(err)
         }
-        return new AICodeCorrect({
+        return new AICodeCorrectSummary({
             "corrected_code": "",
             "explanation": "",
         })
