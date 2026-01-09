@@ -88,7 +88,7 @@ class CodeReview {
             if(!rawJson){
                 return new AICodeCorrect({
                      "corrected_code": "",
-                     "explanations": ""
+                     "explanation": ""
                 })
             }
 
@@ -101,7 +101,7 @@ class CodeReview {
         }
         return new AICodeCorrect({
             "corrected_code": "",
-            "explanations": "",
+            "explanation": "",
         })
     }
 }
