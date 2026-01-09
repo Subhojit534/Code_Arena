@@ -49,7 +49,7 @@ class CodeReview {
                 })
             }
 
-            const cleanedJson = rawJson.replace(/```json\n|```/g, '').trim();
+            const cleanedJson = rawJson.replace(/```json\n|```/g, '').trim()
             const parsedJson = JSON.parse(cleanedJson)
 
             return new AISummary(parsedJson)
@@ -61,6 +61,47 @@ class CodeReview {
             "suggestion": "N/A",
             "time_complexity": "N/A",
             "space_complexity": "N/A",
+        })
+    }
+
+    async codeCorrect(aiOutputPayload){
+          const prompt = `You are a code correcting AI, here code will provided to you in json payload, analyze and assess the code output or error from our backend compiler and make adequate adjustments.
+          Remember these are university student, do not suggest some highly complex code, if they did right, only suggest things that would be appropriate for an engineering student.
+          Provide the output only as valid JSON object. Do not include any text, explanation or comments in code or outside, make everything concise in "explantions" part.
+          Use this JSON schema:
+          "corrected_code": "string"
+          "explanations": "string make it breif"
+          ---
+          **Input Data for Analysis:**
+          ${JSON.stringify(aiOutputPayload)}
+          `
+
+        const textPart = {
+            text: prompt,
+        }
+
+        try{
+            const result = await this.model.generateContent([textPart])
+            const response = result.response
+            const rawJson = response.text()
+
+            if(!rawJson){
+                return new AICodeCorrect({
+                     "corrected_code": "",
+                     "explanations": ""
+                })
+            }
+
+            const cleanedJson = rawjson.replace(/```json\n|```/g, '').trim()
+            const parseJson = JSON.parse(cleanedJson)
+            
+            return new AICodeCorrect(parseJson)
+        }catch(err){
+             console.log(err)
+        }
+        return new AICodeCorrect({
+            "corrected_code": "",
+            "explanations": "",
         })
     }
 }
