@@ -32,7 +32,42 @@ class AIPayload {
         }
     }
 }
+
+
+class AICodeCorrectSummary{
+    constructor(outputSummary){
+        this.correctedCode = outputSummary.corrected_code
+        this.explanation = outputSummary.explanation
+    }
+}
+
+class AICodeCorrectPayload{
+    constructor({
+        code,
+        question,
+        output,
+        error
+    }){
+        this.code = code
+        this.question = question
+        this.output = output
+        this.error = error
+    }
+
+    toJson() {
+        return {
+            "code": this.code,
+            "question": this.question,
+            "output": this.output,
+            "error": this.error,
+        }
+    }
+}
+
+
 export {
     AIPayload,
-    AISummary
+    AISummary,
+    AICodeCorrectPayload,
+    AICodeCorrectSummary
 }
