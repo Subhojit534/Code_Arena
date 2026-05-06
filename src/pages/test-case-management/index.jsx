@@ -10,6 +10,111 @@ import TestExecutionPreview from './components/TestExecutionPanel';
 import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
 
+export let problems = [
+    {
+        id: 1,
+        title: 'Two Sum',
+        difficulty: 'Easy',
+        testCaseCount: 5
+    },
+    {
+        id: 2,
+        title: 'Reverse Linked List',
+        difficulty: 'Medium',
+        testCaseCount: 8
+    },
+    {
+        id: 3,
+        title: 'Binary Tree Maximum Path Sum',
+        difficulty: 'Hard',
+        testCaseCount: 12
+    },
+    {
+        id: 4,
+        title: 'Valid Parentheses',
+        difficulty: 'Easy',
+        testCaseCount: 6
+    },
+    {
+        id: 5,
+        title: 'Merge K Sorted Lists',
+        difficulty: 'Hard',
+        testCaseCount: 10
+    }
+];
+
+export let mockTestCases = {
+    1: [
+        {
+            id: 'tc-001',
+            description: 'Basic two element array',
+            input: '[2, 7]\n9',
+            expectedOutput: '[0, 1]',
+            isPublic: true,
+            priority: 'high'
+        },
+        {
+            id: 'tc-002',
+            description: 'Array with multiple valid pairs',
+            input: '[3, 2, 4]\n6',
+            expectedOutput: '[1, 2]',
+            isPublic: true,
+            priority: 'high'
+        },
+        {
+            id: 'tc-003',
+            description: 'Large array with target at end',
+            input: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n19',
+            expectedOutput: '[8, 9]',
+            isPublic: true,
+            priority: 'medium'
+        },
+        {
+            id: 'tc-004',
+            description: 'Edge case with negative numbers',
+            input: '[-1, -2, -3, -4, -5]\n-8',
+            expectedOutput: '[2, 4]',
+            isPublic: false,
+            priority: 'high'
+        },
+        {
+            id: 'tc-005',
+            description: 'Large dataset performance test',
+            input: '[1, 2, 3, ..., 10000]\n19999',
+            expectedOutput: '[9998, 9999]',
+            isPublic: false,
+            priority: 'low'
+        }
+    ],
+    2: [
+        {
+            id: 'tc-006',
+            description: 'Single node list',
+            input: '[1]',
+            expectedOutput: '[1]',
+            isPublic: true,
+            priority: 'high'
+        },
+        {
+            id: 'tc-007',
+            description: 'Two node list',
+            input: '[1, 2]',
+            expectedOutput: '[2, 1]',
+            isPublic: true,
+            priority: 'high'
+        },
+        {
+            id: 'tc-008',
+            description: 'Multiple nodes',
+            input: '[1, 2, 3, 4, 5]',
+            expectedOutput: '[5, 4, 3, 2, 1]',
+            isPublic: true,
+            priority: 'medium'
+        }
+    ]
+};
+
+
 const TestCaseManagement = () => {
     const navigate = useNavigate();
     const [selectedProblem, setSelectedProblem] = useState('');
@@ -26,110 +131,6 @@ const TestCaseManagement = () => {
         priority: 'medium'
     });
     const [errors, setErrors] = useState({});
-
-    const problems = [
-        {
-            id: 'prob-001',
-            title: 'Two Sum',
-            difficulty: 'Easy',
-            testCaseCount: 5
-        },
-        {
-            id: 'prob-002',
-            title: 'Reverse Linked List',
-            difficulty: 'Medium',
-            testCaseCount: 8
-        },
-        {
-            id: 'prob-003',
-            title: 'Binary Tree Maximum Path Sum',
-            difficulty: 'Hard',
-            testCaseCount: 12
-        },
-        {
-            id: 'prob-004',
-            title: 'Valid Parentheses',
-            difficulty: 'Easy',
-            testCaseCount: 6
-        },
-        {
-            id: 'prob-005',
-            title: 'Merge K Sorted Lists',
-            difficulty: 'Hard',
-            testCaseCount: 10
-        }
-    ];
-
-    const mockTestCases = {
-        'prob-001': [
-            {
-                id: 'tc-001',
-                description: 'Basic two element array',
-                input: '[2, 7]\n9',
-                expectedOutput: '[0, 1]',
-                isPublic: true,
-                priority: 'high'
-            },
-            {
-                id: 'tc-002',
-                description: 'Array with multiple valid pairs',
-                input: '[3, 2, 4]\n6',
-                expectedOutput: '[1, 2]',
-                isPublic: true,
-                priority: 'high'
-            },
-            {
-                id: 'tc-003',
-                description: 'Large array with target at end',
-                input: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n19',
-                expectedOutput: '[8, 9]',
-                isPublic: true,
-                priority: 'medium'
-            },
-            {
-                id: 'tc-004',
-                description: 'Edge case with negative numbers',
-                input: '[-1, -2, -3, -4, -5]\n-8',
-                expectedOutput: '[2, 4]',
-                isPublic: false,
-                priority: 'high'
-            },
-            {
-                id: 'tc-005',
-                description: 'Large dataset performance test',
-                input: '[1, 2, 3, ..., 10000]\n19999',
-                expectedOutput: '[9998, 9999]',
-                isPublic: false,
-                priority: 'low'
-            }
-        ],
-        'prob-002': [
-            {
-                id: 'tc-006',
-                description: 'Single node list',
-                input: '[1]',
-                expectedOutput: '[1]',
-                isPublic: true,
-                priority: 'high'
-            },
-            {
-                id: 'tc-007',
-                description: 'Two node list',
-                input: '[1, 2]',
-                expectedOutput: '[2, 1]',
-                isPublic: true,
-                priority: 'high'
-            },
-            {
-                id: 'tc-008',
-                description: 'Multiple nodes',
-                input: '[1, 2, 3, 4, 5]',
-                expectedOutput: '[5, 4, 3, 2, 1]',
-                isPublic: true,
-                priority: 'medium'
-            }
-        ]
-    };
 
     useEffect(() => {
         if (selectedProblem) {
@@ -184,7 +185,8 @@ const TestCaseManagement = () => {
                 id: `tc-${Date.now()}`,
                 ...formData
             };
-            setTestCases([...testCases, newTestCase]);
+            mockTestCases = [...mockTestCases, newTestCase]
+            setTestCases();
         }
 
         resetForm();

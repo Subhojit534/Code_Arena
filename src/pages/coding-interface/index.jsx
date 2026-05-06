@@ -396,7 +396,7 @@ const CodingInterface = () => {
       var avgTime = 0
       var totalExecutionTime = avgTime
       if (isSuccess) {
-        result?.results?.forEach((result) => avgTime = avgTime + result?.status?.exec_time_ms ?? 0)
+        result?.results?.forEach((result) => avgTime = avgTime + (result?.status?.exec_time_ms ?? 0))
         totalExecutionTime = avgTime
         avgTime = avgTime / result?.results.length
       }
@@ -465,7 +465,7 @@ const CodingInterface = () => {
       var avgTime = 0
       var totalExecutionTime = avgTime
       if (isSuccess) {
-        result?.results?.forEach((result) => avgTime = avgTime + result?.status?.exec_time_ms ?? 0)
+        result?.results?.forEach((result) => avgTime = avgTime + (result?.status?.exec_time_ms ?? 0))
         totalExecutionTime = avgTime
         avgTime = avgTime / result?.results.length
       }

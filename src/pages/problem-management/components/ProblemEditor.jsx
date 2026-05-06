@@ -9,15 +9,22 @@ const ProblemEditor = ({ problem, onSave, onCancel, onDelete }) => {
   const [activeTab, setActiveTab] = useState('statement');
   const [isPreview, setIsPreview] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    difficulty: 'medium',
-    category: '',
+    id: Math.random() * 99999 + 10000,
+    title: "",
+    difficulty: "",
+    category: "",
     tags: [],
-    statement: '',
-    constraints: '',
+    status: "",
+    createdAt: Date.now(),
+    languages: ["c", "cpp", "python", "java", "go", "rust"],
+    statement: "",
+    constraints: "",
     examples: [],
-    templates: {},
-    status: 'draft'
+    templates: {
+      python: "def isValid(s):\n    # Write your code here\n    pass",
+      cpp: "bool isValid(string s) {\n    // Write your code here\n}",
+      java: "public boolean isValid(String s) {\n    // Write your code here\n}"
+    }
   });
 
   useEffect(() => {
@@ -25,15 +32,22 @@ const ProblemEditor = ({ problem, onSave, onCancel, onDelete }) => {
       setFormData(problem);
     } else {
       setFormData({
-        title: '',
-        difficulty: 'medium',
-        category: '',
+        id: Math.random() * 99999 + 10000,
+        title: "",
+        difficulty: "",
+        category: "",
         tags: [],
-        statement: '',
-        constraints: '',
+        status: "",
+        createdAt: Date.now(),
+        languages: ["c", "cpp", "python", "java", "go", "rust"],
+        statement: "",
+        constraints: "",
         examples: [],
-        templates: {},
-        status: 'draft'
+        templates: {
+          python: "def isValid(s):\n    # Write your code here\n    pass",
+          cpp: "bool isValid(string s) {\n    // Write your code here\n}",
+          java: "public boolean isValid(String s) {\n    // Write your code here\n}"
+        }
       });
     }
   }, [problem]);
@@ -95,7 +109,7 @@ const ProblemEditor = ({ problem, onSave, onCancel, onDelete }) => {
   const handleExampleChange = (index, field, value) => {
     setFormData(prev => ({
       ...prev,
-      examples: prev?.examples?.map((ex, i) => 
+      examples: prev?.examples?.map((ex, i) =>
         i === index ? { ...ex, [field]: value } : ex
       )
     }));
@@ -115,13 +129,12 @@ const ProblemEditor = ({ problem, onSave, onCancel, onDelete }) => {
     }));
   };
 
-  if (!problem && !formData?.title) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full p-8 text-center bg-muted/30">
-        <Icon name="FileText" size={64} className="text-muted-foreground mb-4" />
-        <h3 className="text-lg font-semibold text-foreground mb-2">No Problem Selected</h3>
-        <p className="text-muted-foreground mb-6">Select a problem from the list or create a new one to get started</p>
-      </div>
+  if (!problem) {
+    (<div className="flex flex-col items-center justify-center h-full p-8 text-center bg-muted/30">
+      <Icon name="FileText" size={64} className="text-muted-foreground mb-4" />
+      <h3 className="text-lg font-semibold text-foreground mb-2">No Problem Selected</h3>
+      <p className="text-muted-foreground mb-6">Select a problem from the list or create a new one to get started</p>
+    </div>
     );
   }
 
@@ -208,10 +221,9 @@ const ProblemEditor = ({ problem, onSave, onCancel, onDelete }) => {
           <button
             key={tab?.id}
             onClick={() => setActiveTab(tab?.id)}
-            className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
-              activeTab === tab?.id
-                ? 'text-primary border-b-2 border-primary bg-primary/5' :'text-muted-foreground hover:text-foreground hover:bg-muted'
-            }`}
+            className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap ${activeTab === tab?.id
+              ? 'text-primary border-b-2 border-primary bg-primary/5' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+              }`}
           >
             <Icon name={tab?.icon} size={16} />
             <span>{tab?.label}</span>
@@ -224,10 +236,9 @@ const ProblemEditor = ({ problem, onSave, onCancel, onDelete }) => {
             <div className="bg-card rounded-lg border border-border p-6">
               <h1 className="text-2xl font-bold text-foreground mb-4">{formData?.title}</h1>
               <div className="flex items-center gap-4 mb-6">
-                <span className={`px-3 py-1 text-sm font-medium rounded-full ${
-                  formData?.difficulty === 'easy' ? 'text-green-600 bg-green-50 dark:text-green-400 dark:bg-green-950' :
-                  formData?.difficulty === 'medium'? 'text-amber-600 bg-amber-50 dark:text-amber-400 dark:bg-amber-950' : 'text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-950'
-                }`}>
+                <span className={`px-3 py-1 text-sm font-medium rounded-full ${formData?.difficulty === 'easy' ? 'text-green-600 bg-green-50 dark:text-green-400 dark:bg-green-950' :
+                  formData?.difficulty === 'medium' ? 'text-amber-600 bg-amber-50 dark:text-amber-400 dark:bg-amber-950' : 'text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-950'
+                  }`}>
                   {formData?.difficulty?.charAt(0)?.toUpperCase() + formData?.difficulty?.slice(1)}
                 </span>
                 <span className="text-muted-foreground">{formData?.category}</span>

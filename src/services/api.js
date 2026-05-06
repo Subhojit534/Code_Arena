@@ -106,8 +106,6 @@ const mockData = {
 
 const api = {
     get: async (url) => {
-
-
         if (url === '/leaderboard') {
             await mockDelay(800);
             return {
