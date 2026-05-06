@@ -74,19 +74,19 @@ const CodingInterface = () => {
       ],
       publicTestCases: [
         {
-          input: "[2,7,11,15], 9",
+          input: "2,7,11,15\n9\n",
           expectedOutput: "[0,1]",
           actualOutput: null,
           status: null
         },
         {
-          input: "[3,2,4], 6",
+          input: "3,2,4\n6\n",
           expectedOutput: "[1,2]",
           actualOutput: null,
           status: null
         },
         {
-          input: "[3,3], 6",
+          input: "3,3\n6\n",
           expectedOutput: "[0,1]",
           actualOutput: null,
           status: null
