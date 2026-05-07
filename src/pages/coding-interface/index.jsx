@@ -755,6 +755,49 @@ const CodingInterface = () => {
     },
 
 
+    {
+      "id": 2003,
+      "title": "Max Pair Sum Under Limit",
+      "difficulty": "Medium",
+      "score": 1200,
+      "submissions": 70,
+      "successRate": 50,
+      "solved": false,
+      "description": "Pair elements such that sum of each pair ≤ k. Maximize number of pairs.",
+      "constraints": [
+        "1 ≤ n ≤ 10^5",
+        "1 ≤ a[i] ≤ 10^5"
+      ],
+      "examples": [
+        {
+          "input": "5 5\n1 2 3 4 5",
+          "output": "2"
+        }
+      ],
+      "publicTestCases": [
+        { "input": "1 5\n3", "expectedOutput": "0" },
+        { "input": "2 5\n2 3", "expectedOutput": "1" },
+        { "input": "3 3\n1 1 1", "expectedOutput": "1" },
+        { "input": "4 5\n1 2 3 4", "expectedOutput": "2" },
+        { "input": "5 4\n1 1 1 1 1", "expectedOutput": "2" },
+        { "input": "6 6\n1 2 3 4 5 6", "expectedOutput": "3" },
+        { "input": "4 3\n2 2 2 2", "expectedOutput": "2" },
+        { "input": "4 5\n1 4 2 3", "expectedOutput": "2" },
+        { "input": "3 4\n2 2 2", "expectedOutput": "1" },
+        { "input": "6 7\n1 6 2 5 3 4", "expectedOutput": "3" },
+        { "input": "7 10\n2 3 5 7 1 4 6", "expectedOutput": "3" },
+        { "input": "5 8\n3 3 3 3 3", "expectedOutput": "2" },
+        { "input": "8 10\n1 2 3 4 5 6 7 8", "expectedOutput": "4" },
+        { "input": "9 9\n1 2 3 4 5 6 7 8 9", "expectedOutput": "4" },
+        { "input": "10 10\n1 1 1 1 1 1 1 1 1 1", "expectedOutput": "5" },
+        { "input": "4 6\n3 3 3 3", "expectedOutput": "2" },
+        { "input": "6 10\n5 5 5 5 5 5", "expectedOutput": "3" },
+        { "input": "5 6\n1 2 3 4 5", "expectedOutput": "2" },
+        { "input": "3 5\n2 2 2", "expectedOutput": "1" },
+        { "input": "6 8\n1 7 2 6 3 5", "expectedOutput": "3" }
+      ]
+    }
+
   ];
 
   const [problems, setProblems] = useState(initialMockProblems);
