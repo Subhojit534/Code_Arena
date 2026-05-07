@@ -544,7 +544,7 @@ const CodingInterface = () => {
       submissions: 1000000,
       successRate: 55,
       solved: false,
-      description: "A group of schoolchildren is going on a trip. Each group consists of 1 to 4 children. A taxi can carry at most 4 children. Find the minimum number of taxis needed so that all children can travel. Groups cannot be split, but multiple groups can share a taxi if total size ≤ 4.",
+      description: "After the lessons n groups of schoolchildren went outside and decided to visit Polycarpus to celebrate his birthday. We know that the i-th group consists of si friends (1 ≤ si ≤ 4), and they want to go to Polycarpus together. They decided to get there by taxi. Each car can carry at most four passengers. What minimum number of cars will the children need if all members of each group should ride in the same taxi (but one taxi can take more than one group)?",
       constraints: [
         "1 ≤ n ≤ 10^5",
         "1 ≤ a[i] ≤ 4"
@@ -627,13 +627,20 @@ const CodingInterface = () => {
     },
     {
       "id": 2001,
-      "title": "Minimum Boats",
+      "title": "295C Minimum Boats",
       "difficulty": "Medium",
       "score": 1200,
       "submissions": 120,
       "successRate": 52,
       "solved": false,
-      "description": "Each boat can carry at most 2 people with total weight ≤ limit. Find the minimum number of boats required.",
+      "description": `One day Greg and his friends were walking in the forest. Overall there were n people walking, including Greg. Soon he found himself in front of a river. The guys immediately decided to get across the river. Luckily, there was a boat by the river bank, just where the guys were standing. We know that the boat can hold people with the total weight of at most k kilograms.
+
+Greg immediately took a piece of paper and listed there the weights of all people in his group (including himself). It turned out that each person weights either 50 or 100 kilograms. Now Greg wants to know what minimum number of times the boat needs to cross the river to transport the whole group to the other bank. The boat needs at least one person to navigate it from one bank to the other. As the boat crosses the river, it can have any non-zero number of passengers as long as their total weight doesn't exceed k.
+
+Also Greg is wondering, how many ways there are to transport everybody to the other side in the minimum number of boat rides. Two ways are considered distinct if during some ride they have distinct sets of people on the boat.
+
+Help Greg with this problem.`,
+
       "constraints": [
         "1 ≤ n ≤ 10^5",
         "1 ≤ weight[i] ≤ 10^5",
@@ -654,8 +661,8 @@ const CodingInterface = () => {
         { "input": "4 4\n1 2 2 3", "expectedOutput": "2" },
         { "input": "5 5\n1 1 1 1 1", "expectedOutput": "3" },
         { "input": "5 5\n5 5 5 5 5", "expectedOutput": "5" },
-        { "input": "6 6\n1 2 3 4 5 6", "expectedOutput": "4" },
-        { "input": "4 3\n2 2 2 2", "expectedOutput": "4" },
+        { "input": "6 6\n1 2 3 4 5 6", "expectedOutput": "2" },
+        { "input": "4 3\n2 2 2 2", "expectedOutput": "0" },
         { "input": "4 5\n1 4 2 3", "expectedOutput": "2" },
         { "input": "3 4\n2 2 2", "expectedOutput": "2" },
         { "input": "6 7\n1 6 2 5 3 4", "expectedOutput": "3" },
@@ -736,8 +743,8 @@ const CodingInterface = () => {
         { "input": "3 3\n1 1 1", "expectedOutput": "1" },
         { "input": "4 5\n1 2 3 4", "expectedOutput": "2" },
         { "input": "5 4\n1 1 1 1 1", "expectedOutput": "2" },
-        { "input": "6 6\n1 2 3 4 5 6", "expectedOutput": "3" },
-        { "input": "4 3\n2 2 2 2", "expectedOutput": "2" },
+        { "input": "6 6\n1 2 3 4 5 6", "expectedOutput": "2" },
+        { "input": "4 3\n2 2 2 2", "expectedOutput": "0" },
         { "input": "4 5\n1 4 2 3", "expectedOutput": "2" },
         { "input": "3 4\n2 2 2", "expectedOutput": "1" },
         { "input": "6 7\n1 6 2 5 3 4", "expectedOutput": "3" },
@@ -753,50 +760,36 @@ const CodingInterface = () => {
         { "input": "6 8\n1 7 2 6 3 5", "expectedOutput": "3" }
       ]
     },
-
-
     {
-      "id": 2003,
-      "title": "Max Pair Sum Under Limit",
+      "id": 2004,
+      "title": "Minimum Rooms",
       "difficulty": "Medium",
       "score": 1200,
-      "submissions": 70,
-      "successRate": 50,
-      "solved": false,
-      "description": "Pair elements such that sum of each pair ≤ k. Maximize number of pairs.",
-      "constraints": [
-        "1 ≤ n ≤ 10^5",
-        "1 ≤ a[i] ≤ 10^5"
-      ],
-      "examples": [
-        {
-          "input": "5 5\n1 2 3 4 5",
-          "output": "2"
-        }
-      ],
+      "description": "You are given a schedule of meetings, where each meeting is represented by a pair of integers (start, end). The start time denotes when the meeting begins, and the end time denotes when the meeting finishes. All meetings take place within a shared facility that has multiple identical rooms available.\n\nYour task is to determine the minimum number of rooms required so that all meetings can be conducted without any conflicts. A conflict occurs if two meetings overlap in time and are assigned to the same room.\n\nA meeting [s1, e1] overlaps with another meeting [s2, e2] if they share any common time interval. Note that if one meeting ends exactly at the same time another meeting starts (e1 = s2), they are NOT considered overlapping, and can be scheduled in the same room.\n\nYou must assign each meeting to a room such that no two overlapping meetings share the same room, and the total number of rooms used is minimized.\n\nThis problem is a classic example of interval scheduling and can be efficiently solved using a greedy approach. One common strategy is to process all start and end times in sorted order and track how many meetings are active at any given time. The maximum number of simultaneously active meetings at any moment determines the minimum number of rooms required.\n\nAlternatively, this can also be solved using a min-heap (priority queue) where you track the earliest ending meeting currently occupying a room and reuse rooms whenever possible.\n\nThe key insight is that the answer is equal to the maximum number of overlapping intervals at any point in time.\n\nInput Format:\n- The first line contains an integer n, the number of meetings.\n- The next n lines each contain two integers s and e, representing the start and end times of a meeting.\n\nOutput Format:\n- Print a single integer: the minimum number of rooms required to accommodate all meetings without overlap.\n\nConstraints:\n- 1 ≤ n ≤ 10^5\n- 0 ≤ start < end ≤ 10^9\n\nEdge Cases to Consider:\n- All meetings completely overlap → need n rooms.\n- No meetings overlap → need only 1 room.\n- Meetings with same start time.\n- Meetings with same end time.\n- Nested intervals (one large meeting covering many smaller ones).\n\nHint:\nSort all start and end times separately and use two pointers to simulate the timeline, increasing room count when a meeting starts and decreasing when one ends. Track the maximum value reached.",
       "publicTestCases": [
-        { "input": "1 5\n3", "expectedOutput": "0" },
-        { "input": "2 5\n2 3", "expectedOutput": "1" },
-        { "input": "3 3\n1 1 1", "expectedOutput": "1" },
-        { "input": "4 5\n1 2 3 4", "expectedOutput": "2" },
-        { "input": "5 4\n1 1 1 1 1", "expectedOutput": "2" },
-        { "input": "6 6\n1 2 3 4 5 6", "expectedOutput": "3" },
-        { "input": "4 3\n2 2 2 2", "expectedOutput": "2" },
-        { "input": "4 5\n1 4 2 3", "expectedOutput": "2" },
-        { "input": "3 4\n2 2 2", "expectedOutput": "1" },
-        { "input": "6 7\n1 6 2 5 3 4", "expectedOutput": "3" },
-        { "input": "7 10\n2 3 5 7 1 4 6", "expectedOutput": "3" },
-        { "input": "5 8\n3 3 3 3 3", "expectedOutput": "2" },
-        { "input": "8 10\n1 2 3 4 5 6 7 8", "expectedOutput": "4" },
-        { "input": "9 9\n1 2 3 4 5 6 7 8 9", "expectedOutput": "4" },
-        { "input": "10 10\n1 1 1 1 1 1 1 1 1 1", "expectedOutput": "5" },
-        { "input": "4 6\n3 3 3 3", "expectedOutput": "2" },
-        { "input": "6 10\n5 5 5 5 5 5", "expectedOutput": "3" },
-        { "input": "5 6\n1 2 3 4 5", "expectedOutput": "2" },
-        { "input": "3 5\n2 2 2", "expectedOutput": "1" },
-        { "input": "6 8\n1 7 2 6 3 5", "expectedOutput": "3" }
+        { "input": "1\n1 2", "expectedOutput": "1" },
+        { "input": "2\n1 3\n2 4", "expectedOutput": "2" },
+        { "input": "2\n1 2\n3 4", "expectedOutput": "1" },
+        { "input": "3\n1 5\n2 6\n3 7", "expectedOutput": "3" },
+        { "input": "4\n1 2\n2 3\n3 4\n4 5", "expectedOutput": "1" },
+        { "input": "5\n1 10\n2 3\n4 5\n6 7\n8 9", "expectedOutput": "2" },
+        { "input": "3\n1 4\n2 3\n3 5", "expectedOutput": "2" },
+        { "input": "4\n1 4\n2 5\n7 8\n6 9", "expectedOutput": "2" },
+        { "input": "5\n1 3\n3 5\n5 7\n7 9\n9 11", "expectedOutput": "1" },
+        { "input": "3\n1 10\n2 9\n3 8", "expectedOutput": "3" },
+        { "input": "4\n1 2\n1 2\n1 2\n1 2", "expectedOutput": "4" },
+        { "input": "3\n5 10\n6 7\n8 9", "expectedOutput": "2" },
+        { "input": "6\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7", "expectedOutput": "1" },
+        { "input": "5\n1 5\n2 3\n3 4\n4 6\n6 7", "expectedOutput": "2" },
+        { "input": "4\n2 3\n3 4\n4 5\n5 6", "expectedOutput": "1" },
+        { "input": "5\n1 10\n2 9\n3 8\n4 7\n5 6", "expectedOutput": "5" },
+        { "input": "3\n10 20\n15 25\n30 40", "expectedOutput": "2" },
+        { "input": "4\n1 100\n2 3\n4 5\n6 7", "expectedOutput": "2" },
+        { "input": "5\n1 2\n2 3\n2 3\n3 4\n4 5", "expectedOutput": "2" },
+        { "input": "2\n1 100\n50 150", "expectedOutput": "2" }
       ]
-    }
+    },
+
 
   ];
 
