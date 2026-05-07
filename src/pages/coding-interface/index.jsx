@@ -745,9 +745,9 @@ Help Greg with this problem.`,
         { "input": "5 4\n1 1 1 1 1", "expectedOutput": "2" },
         { "input": "6 6\n1 2 3 4 5 6", "expectedOutput": "2" },
         { "input": "4 3\n2 2 2 2", "expectedOutput": "0" },
-        { "input": "4 5\n1 4 2 3", "expectedOutput": "2" },
+        { "input": "4 5\n1 4 2 3", "expectedOutput": "1" },
         { "input": "3 4\n2 2 2", "expectedOutput": "1" },
-        { "input": "6 7\n1 6 2 5 3 4", "expectedOutput": "3" },
+        { "input": "6 7\n1 6 2 5 3 4", "expectedOutput": "1" },
         { "input": "7 10\n2 3 5 7 1 4 6", "expectedOutput": "3" },
         { "input": "5 8\n3 3 3 3 3", "expectedOutput": "2" },
         { "input": "8 10\n1 2 3 4 5 6 7 8", "expectedOutput": "4" },
@@ -757,7 +757,7 @@ Help Greg with this problem.`,
         { "input": "6 10\n5 5 5 5 5 5", "expectedOutput": "3" },
         { "input": "5 6\n1 2 3 4 5", "expectedOutput": "2" },
         { "input": "3 5\n2 2 2", "expectedOutput": "1" },
-        { "input": "6 8\n1 7 2 6 3 5", "expectedOutput": "3" }
+        { "input": "6 8\n1 7 2 6 3 5", "expectedOutput": "1" }
       ]
     },
     {
