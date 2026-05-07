@@ -13,6 +13,42 @@ import { AIPayload } from 'models/ai';
 
 const codeReview = new CodeReview()
 
+const buildMaxAdjacentDiffTestCases = () => {
+  const baseCases = [
+    [1, 3, 8, 2, 7],
+    [10, 10, 10, 10],
+    [100, 1, 50, 2, 80, 3],
+    [4, 9, 1, 14, 6],
+    [20, 5, 15, 2, 30],
+    [7, 17, 27, 37],
+    [9, 4, 12, 1, 20],
+    [6, 18, 3, 15, 9],
+    [2, 100, 4, 90, 6],
+    [11, 23, 5, 19, 7, 31]
+  ];
+
+  const generatedCases = Array.from({ length: 40 }, (_, index) => {
+    const length = 5 + (index % 6);
+    return Array.from({ length }, (_, position) => (((index + 7) * (position + 3)) % 121) - 60);
+  });
+
+  const allCases = [...baseCases, ...generatedCases];
+
+  return allCases.map((values) => {
+    const maxDiff = values.slice(1).reduce(
+      (best, value, index) => Math.max(best, Math.abs(value - values[index])),
+      0
+    );
+
+    return {
+      input: `${values.length}\n${values.join(' ')}`,
+      expectedOutput: String(maxDiff),
+      actualOutput: null,
+      status: null
+    };
+  });
+};
+
 const CodingInterface = () => {
   const navigate = useNavigate();
 
@@ -303,6 +339,422 @@ const CodingInterface = () => {
         }
       ]
     },
+    {
+      id: 7,
+      title: "Codeforces Style - Scoreboard Update",
+      difficulty: "Easy",
+      score: 120,
+      submissions: 214,
+      successRate: 83,
+      solved: false,
+      description: "You are given an integer n followed by n contest scores. Print the sum of all scores, the maximum score, and the minimum score, each on a separate line.",
+      constraints: [
+        "1 ≤ n ≤ 1000",
+        "0 ≤ score[i] ≤ 10^6"
+      ],
+      examples: [
+        {
+          input: "5\n10 20 30 40 50",
+          output: "150\n50\n10",
+          explanation: "The total is 150, the maximum is 50, and the minimum is 10."
+        },
+        {
+          input: "3\n7 7 7",
+          output: "21\n7\n7",
+          explanation: "All scores are equal, so sum, max, and min are easy to compute."
+        }
+      ],
+      publicTestCases: [
+        {
+          input: "5\n10 20 30 40 50",
+          expectedOutput: "150\n50\n10",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "4\n100 1 50 2",
+          expectedOutput: "153\n100\n1",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "3\n7 7 7",
+          expectedOutput: "21\n7\n7",
+          actualOutput: null,
+          status: null
+        }
+      ]
+    },
+    {
+      id: 8,
+      title: "Codeforces Style - Nearest Round Number",
+      difficulty: "Easy",
+      score: 130,
+      submissions: 188,
+      successRate: 79,
+      solved: false,
+      description: "For each given integer, print the nearest multiple of 10 that is greater than or equal to it. Process all numbers in the order given.",
+      constraints: [
+        "1 ≤ n ≤ 1000",
+        "1 ≤ value ≤ 10^9"
+      ],
+      examples: [
+        {
+          input: "4\n1 9 10 21",
+          output: "10\n10\n10\n30",
+          explanation: "Each value is rounded up to the next multiple of 10."
+        }
+      ],
+      publicTestCases: [
+        {
+          input: "4\n1 9 10 21",
+          expectedOutput: "10\n10\n10\n30",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "3\n100 101 109",
+          expectedOutput: "100\n110\n110",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "5\n7 8 19 20 99",
+          expectedOutput: "10\n10\n20\n20\n100",
+          actualOutput: null,
+          status: null
+        }
+      ]
+    },
+    {
+      id: 9,
+      title: "9. Codeforces Style - Odd Prefix Count",
+      difficulty: "Medium",
+      score: 180,
+      submissions: 156,
+      successRate: 71,
+      solved: false,
+      description: "Given an array, print the number of odd values in every prefix. The i-th output line should contain the count of odd numbers among the first i elements.",
+      constraints: [
+        "1 ≤ n ≤ 2000",
+        "-10^9 ≤ a[i] ≤ 10^9"
+      ],
+      examples: [
+        {
+          input: "6\n1 2 3 4 5 6",
+          output: "1\n1\n2\n2\n3\n3",
+          explanation: "Odd numbers appear at positions 1, 3, and 5."
+        }
+      ],
+      publicTestCases: [
+        {
+          input: "6\n1 2 3 4 5 6",
+          expectedOutput: "1\n1\n2\n2\n3\n3",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "5\n2 4 6 8 10",
+          expectedOutput: "0\n0\n0\n0\n0",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "5\n9 1 8 3 7",
+          expectedOutput: "1\n2\n2\n3\n4",
+          actualOutput: null,
+          status: null
+        }
+      ]
+    },
+    {
+      id: 10,
+      title: "10. Codeforces Style - Balance the Array",
+      difficulty: "Medium",
+      score: 210,
+      submissions: 143,
+      successRate: 64,
+      solved: false,
+      description: "Given an array, determine whether the sum of the first half is equal to the sum of the second half. Print YES if they are equal, otherwise print NO.",
+      constraints: [
+        "2 ≤ n ≤ 2000",
+        "n is even",
+        "-10^9 ≤ a[i] ≤ 10^9"
+      ],
+      examples: [
+        {
+          input: "4\n1 2 3 4",
+          output: "NO",
+          explanation: "The first half sums to 3 and the second half sums to 7."
+        },
+        {
+          input: "6\n5 5 1 2 3 6",
+          output: "YES",
+          explanation: "The first three numbers sum to 11 and the last three also sum to 11."
+        }
+      ],
+      publicTestCases: [
+        {
+          input: "4\n1 2 3 4",
+          expectedOutput: "NO",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "6\n5 5 1 2 3 6",
+          expectedOutput: "YES",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "8\n4 4 4 4 4 4 4 4",
+          expectedOutput: "YES",
+          actualOutput: null,
+          status: null
+        }
+      ]
+    },
+    {
+      id: 11,
+      title: "1301B. Codeforces Style - Maximum Adjacent Difference",
+      difficulty: "Medium",
+      score: 260,
+      submissions: 97,
+      successRate: 49,
+      solved: false,
+      description: "For each array, find the maximum absolute difference between two adjacent elements and print it.",
+      constraints: [
+        "2 ≤ n ≤ 10^4",
+        "-10^9 ≤ a[i] ≤ 10^9"
+      ],
+      examples: [
+        {
+          input: "5\n1 3 8 2 7",
+          output: "6",
+          explanation: "The largest adjacent gap is |8 - 2| = 6."
+        }
+      ],
+      publicTestCases: buildMaxAdjacentDiffTestCases()
+    },
+    {
+      id: 158,
+      title: "158B. Taxi",
+      difficulty: "Medium",
+      score: 1200,
+      submissions: 1000000,
+      successRate: 55,
+      solved: false,
+      description: "A group of schoolchildren is going on a trip. Each group consists of 1 to 4 children. A taxi can carry at most 4 children. Find the minimum number of taxis needed so that all children can travel. Groups cannot be split, but multiple groups can share a taxi if total size ≤ 4.",
+      constraints: [
+        "1 ≤ n ≤ 10^5",
+        "1 ≤ a[i] ≤ 4"
+      ],
+      examples: [
+        {
+          input: "5\n1 2 4 3 3",
+          output: "4",
+          explanation: "Groups can be arranged optimally into 4 taxis."
+        }
+      ],
+      publicTestCases: [
+        {
+          input: "5\n1 2 4 3 3",
+          expectedOutput: "4",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "8\n2 3 4 4 2 1 3 1",
+          expectedOutput: "5",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "4\n4 4 4 4",
+          expectedOutput: "4",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "4\n1 1 1 1",
+          expectedOutput: "1",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "6\n1 2 3 4 3 2",
+          expectedOutput: "4",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "3\n2 2 2",
+          expectedOutput: "2",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "7\n1 1 1 2 2 3 4",
+          expectedOutput: "4",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "10\n1 1 1 1 2 2 2 3 3 4",
+          expectedOutput: "5",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "1\n4",
+          expectedOutput: "1",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "5\n2 2 2 2 2",
+          expectedOutput: "3",
+          actualOutput: null,
+          status: null
+        },
+        {
+          input: "9\n1 3 1 3 1 3 1 3 1",
+          expectedOutput: "5",
+          actualOutput: null,
+          status: null
+        }
+      ]
+    },
+    {
+      "id": 2001,
+      "title": "Minimum Boats",
+      "difficulty": "Medium",
+      "score": 1200,
+      "submissions": 120,
+      "successRate": 52,
+      "solved": false,
+      "description": "Each boat can carry at most 2 people with total weight ≤ limit. Find the minimum number of boats required.",
+      "constraints": [
+        "1 ≤ n ≤ 10^5",
+        "1 ≤ weight[i] ≤ 10^5",
+        "1 ≤ limit ≤ 10^5"
+      ],
+      "examples": [
+        {
+          "input": "4 5\n1 2 3 4",
+          "output": "3",
+          "explanation": "Pair 1+4, 2+3 not possible due to limit."
+        }
+      ],
+      "publicTestCases": [
+        { "input": "1 5\n3", "expectedOutput": "1" },
+        { "input": "2 5\n2 3", "expectedOutput": "1" },
+        { "input": "2 5\n3 3", "expectedOutput": "2" },
+        { "input": "3 3\n1 1 1", "expectedOutput": "2" },
+        { "input": "4 4\n1 2 2 3", "expectedOutput": "2" },
+        { "input": "5 5\n1 1 1 1 1", "expectedOutput": "3" },
+        { "input": "5 5\n5 5 5 5 5", "expectedOutput": "5" },
+        { "input": "6 6\n1 2 3 4 5 6", "expectedOutput": "4" },
+        { "input": "4 3\n2 2 2 2", "expectedOutput": "4" },
+        { "input": "4 5\n1 4 2 3", "expectedOutput": "2" },
+        { "input": "3 4\n2 2 2", "expectedOutput": "2" },
+        { "input": "6 7\n1 6 2 5 3 4", "expectedOutput": "3" },
+        { "input": "7 10\n2 3 5 7 1 4 6", "expectedOutput": "4" },
+        { "input": "5 8\n3 3 3 3 3", "expectedOutput": "3" },
+        { "input": "8 10\n1 2 3 4 5 6 7 8", "expectedOutput": "4" },
+        { "input": "9 9\n1 2 3 4 5 6 7 8 9", "expectedOutput": "5" },
+        { "input": "10 10\n1 1 1 1 1 1 1 1 1 1", "expectedOutput": "5" },
+        { "input": "4 6\n3 3 3 3", "expectedOutput": "2" },
+        { "input": "6 10\n5 5 5 5 5 5", "expectedOutput": "3" },
+        { "input": "5 6\n1 2 3 4 5", "expectedOutput": "3" }
+      ]
+    },
+    {
+      "id": 2002,
+      "title": "Min Platforms Required",
+      "difficulty": "Medium",
+      "score": 1300,
+      "submissions": 90,
+      "successRate": 48,
+      "solved": false,
+      "description": "Given arrival and departure times of trains, find the minimum number of platforms required so that no train waits.",
+      "constraints": [
+        "1 ≤ n ≤ 10^5",
+        "0 ≤ time ≤ 10^9"
+      ],
+      "examples": [
+        {
+          "input": "3\n1 3\n2 5\n4 6",
+          "output": "2"
+        }
+      ],
+      "publicTestCases": [
+        { "input": "1\n1 2", "expectedOutput": "1" },
+        { "input": "2\n1 3\n2 4", "expectedOutput": "2" },
+        { "input": "2\n1 2\n3 4", "expectedOutput": "1" },
+        { "input": "3\n1 5\n2 6\n3 7", "expectedOutput": "3" },
+        { "input": "4\n1 2\n2 3\n3 4\n4 5", "expectedOutput": "1" },
+        { "input": "5\n1 10\n2 3\n4 5\n6 7\n8 9", "expectedOutput": "2" },
+        { "input": "3\n1 4\n2 3\n3 5", "expectedOutput": "2" },
+        { "input": "4\n1 4\n2 5\n7 8\n6 9", "expectedOutput": "2" },
+        { "input": "5\n1 3\n3 5\n5 7\n7 9\n9 11", "expectedOutput": "1" },
+        { "input": "3\n1 10\n2 9\n3 8", "expectedOutput": "3" },
+        { "input": "4\n1 2\n1 2\n1 2\n1 2", "expectedOutput": "4" },
+        { "input": "3\n5 10\n6 7\n8 9", "expectedOutput": "2" },
+        { "input": "6\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7", "expectedOutput": "1" },
+        { "input": "5\n1 5\n2 3\n3 4\n4 6\n6 7", "expectedOutput": "2" },
+        { "input": "4\n2 3\n3 4\n4 5\n5 6", "expectedOutput": "1" },
+        { "input": "5\n1 10\n2 9\n3 8\n4 7\n5 6", "expectedOutput": "5" },
+        { "input": "3\n10 20\n15 25\n30 40", "expectedOutput": "2" },
+        { "input": "4\n1 100\n2 3\n4 5\n6 7", "expectedOutput": "2" },
+        { "input": "5\n1 2\n2 3\n2 3\n3 4\n4 5", "expectedOutput": "2" },
+        { "input": "2\n1 100\n50 150", "expectedOutput": "2" }
+      ]
+    },
+    {
+      "id": 2003,
+      "title": "Max Pair Sum Under Limit",
+      "difficulty": "Medium",
+      "score": 1200,
+      "submissions": 70,
+      "successRate": 50,
+      "solved": false,
+      "description": "Pair elements such that sum of each pair ≤ k. Maximize number of pairs.",
+      "constraints": [
+        "1 ≤ n ≤ 10^5",
+        "1 ≤ a[i] ≤ 10^5"
+      ],
+      "examples": [
+        {
+          "input": "5 5\n1 2 3 4 5",
+          "output": "2"
+        }
+      ],
+      "publicTestCases": [
+        { "input": "1 5\n3", "expectedOutput": "0" },
+        { "input": "2 5\n2 3", "expectedOutput": "1" },
+        { "input": "3 3\n1 1 1", "expectedOutput": "1" },
+        { "input": "4 5\n1 2 3 4", "expectedOutput": "2" },
+        { "input": "5 4\n1 1 1 1 1", "expectedOutput": "2" },
+        { "input": "6 6\n1 2 3 4 5 6", "expectedOutput": "3" },
+        { "input": "4 3\n2 2 2 2", "expectedOutput": "2" },
+        { "input": "4 5\n1 4 2 3", "expectedOutput": "2" },
+        { "input": "3 4\n2 2 2", "expectedOutput": "1" },
+        { "input": "6 7\n1 6 2 5 3 4", "expectedOutput": "3" },
+        { "input": "7 10\n2 3 5 7 1 4 6", "expectedOutput": "3" },
+        { "input": "5 8\n3 3 3 3 3", "expectedOutput": "2" },
+        { "input": "8 10\n1 2 3 4 5 6 7 8", "expectedOutput": "4" },
+        { "input": "9 9\n1 2 3 4 5 6 7 8 9", "expectedOutput": "4" },
+        { "input": "10 10\n1 1 1 1 1 1 1 1 1 1", "expectedOutput": "5" },
+        { "input": "4 6\n3 3 3 3", "expectedOutput": "2" },
+        { "input": "6 10\n5 5 5 5 5 5", "expectedOutput": "3" },
+        { "input": "5 6\n1 2 3 4 5", "expectedOutput": "2" },
+        { "input": "3 5\n2 2 2", "expectedOutput": "1" },
+        { "input": "6 8\n1 7 2 6 3 5", "expectedOutput": "3" }
+      ]
+    },
+
+
   ];
 
   const [problems, setProblems] = useState(initialMockProblems);
