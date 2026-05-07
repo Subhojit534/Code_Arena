@@ -790,7 +790,35 @@ Help Greg with this problem.`,
       ]
     },
 
-
+    {
+      "id": 2005,
+      "title": "Max Non-overlapping Segments",
+      "difficulty": "Medium",
+      "score": 1300,
+      "description": "You are given a set of segments (also called intervals), where each segment is defined by two integers: a start time and an end time. Each segment [l, r] represents an activity that begins at time l and finishes at time r.\n\nYour task is to select the maximum number of segments such that no two selected segments overlap with each other. Two segments are said to overlap if they share any common time interval. However, if one segment ends exactly at the same time another segment begins (i.e., r1 = l2), they are considered non-overlapping and can both be selected.\n\nThe goal is to maximize the number of non-overlapping segments chosen from the given set.\n\nThis is a classic greedy problem known as the Activity Selection Problem. The optimal strategy is to always pick the segment that finishes earliest among the remaining segments. By doing so, you leave as much room as possible for future segments.\n\nA common approach to solve this problem efficiently is:\n1. Sort all segments based on their ending times in ascending order.\n2. Initialize a variable to track the end time of the last selected segment.\n3. Iterate through the sorted segments:\n   - If the current segment's start time is greater than or equal to the last selected end time, select it.\n   - Update the last selected end time.\n4. Count how many segments are selected.\n\nThis greedy approach guarantees the maximum number of non-overlapping segments.\n\nInput Format:\n- The first line contains an integer n, the number of segments.\n- The next n lines each contain two integers l and r, representing the start and end of a segment.\n\nOutput Format:\n- Print a single integer: the maximum number of non-overlapping segments that can be selected.\n\nConstraints:\n- 1 ≤ n ≤ 10^5\n- 0 ≤ l < r ≤ 10^9\n\nEdge Cases to Consider:\n- All segments overlap completely → only 1 can be selected.\n- No segments overlap → all can be selected.\n- Multiple segments having the same start and end time.\n- Segments that are nested inside others.\n- Segments with identical end times.\n\nKey Insight:\nThe problem reduces to selecting intervals in such a way that each chosen interval finishes as early as possible, ensuring maximum room for subsequent selections.\n\nTime Complexity:\n- Sorting takes O(n log n)\n- Traversal takes O(n)\n- Overall complexity: O(n log n)\n\nSpace Complexity:\n- O(n) for storing intervals.\n\nHint:\nAlways prioritize the segment with the smallest end time when making a choice.",
+      "publicTestCases": [
+        { "input": "1\n1 2", "expectedOutput": "1" },
+        { "input": "2\n1 3\n2 4", "expectedOutput": "1" },
+        { "input": "2\n1 2\n3 4", "expectedOutput": "2" },
+        { "input": "3\n1 5\n2 6\n3 7", "expectedOutput": "1" },
+        { "input": "4\n1 2\n2 3\n3 4\n4 5", "expectedOutput": "4" },
+        { "input": "5\n1 10\n2 3\n4 5\n6 7\n8 9", "expectedOutput": "4" },
+        { "input": "3\n1 4\n2 3\n3 5", "expectedOutput": "2" },
+        { "input": "4\n1 4\n2 5\n7 8\n6 9", "expectedOutput": "2" },
+        { "input": "5\n1 3\n3 5\n5 7\n7 9\n9 11", "expectedOutput": "5" },
+        { "input": "3\n1 10\n2 9\n3 8", "expectedOutput": "1" },
+        { "input": "4\n1 2\n1 2\n1 2\n1 2", "expectedOutput": "1" },
+        { "input": "3\n5 10\n6 7\n8 9", "expectedOutput": "2" },
+        { "input": "6\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7", "expectedOutput": "6" },
+        { "input": "5\n1 5\n2 3\n3 4\n4 6\n6 7", "expectedOutput": "3" },
+        { "input": "4\n2 3\n3 4\n4 5\n5 6", "expectedOutput": "4" },
+        { "input": "5\n1 10\n2 9\n3 8\n4 7\n5 6", "expectedOutput": "1" },
+        { "input": "3\n10 20\n15 25\n30 40", "expectedOutput": "2" },
+        { "input": "4\n1 100\n2 3\n4 5\n6 7", "expectedOutput": "3" },
+        { "input": "5\n1 2\n2 3\n2 3\n3 4\n4 5", "expectedOutput": "4" },
+        { "input": "2\n1 100\n50 150", "expectedOutput": "1" }
+      ]
+    },
   ];
 
   const [problems, setProblems] = useState(initialMockProblems);
